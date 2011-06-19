@@ -21,7 +21,7 @@ Works! But still more of a prototype, some work still has to be done to make it 
 
 # Installation
 
-	git clone git@github.com:cmichi/twitterwall.git
+	git clone --recursive git@github.com:cmichi/twitterwall.git
 	cd twitterwall
 	echo "exports.user = 'USER'; exports.pw = 'PW';" > twitter_account.js
 	
