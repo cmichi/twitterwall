@@ -1,0 +1,87 @@
+@font-face {
+  font-family: "raleway";
+  src: url("../font/Raleway/raleway_thin.ttf")
+}
+
+body {
+	background:url(../img/bg.png) no-repeat;
+	background-position:left top;
+	padding:0px;
+	margin:0px;
+	font-family: "raleway", "Lucida Sans Unicode","Lucida Grande","Trebuchet MS", Helvetica, Arial, sans-serif;
+}
+
+h1 {color:#00aeff;}
+
+#logo {position:absolute; top:20px; left:60px;}
+#hashtag {position:absolute; top:20px; right:60px;}
+
+.row1 {
+	top:430px;
+	left:60px;
+}
+
+.row0 {
+	top:130px;
+	left:60px;
+}
+
+.row {
+	position:absolute;
+	overflow:hidden; 
+	text-align: justify;
+	width:1350px;
+	height:240px;
+}
+
+#tweet2, #tweet3 {
+	left:460px !important;	
+}
+
+#tweet4, #tweet5 {
+	left:920px !important;	
+}
+
+.tweet {
+	position:absolute;
+	top:0px;
+	left:0px;
+	
+	color:#fff;
+	width:400px;	
+}
+
+.tweet .info {height:86px;}
+
+.tweet .text {
+	height:120px;
+	width:386px; 
+	
+	background:#004667;
+	border:2px solid #91c8e1;
+	font-size:12px;
+	padding:16px;
+}
+
+.tweet .text strong {
+	color:#00aeff;
+}
+
+.tweet .author img {
+	margin-top:20px;
+	margin-right:10px;
+	width:62px;
+	border:2px solid #91c8e1;	
+}
+
+.tweet .sprechblase {
+	position:absolute;
+	bottom:41px;
+	left:110px;
+}
+
+.tweet .name {
+	position:absolute;
+	bottom:1px;
+	font-size:20px;
+}

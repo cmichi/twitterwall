@@ -1,0 +1,17 @@
+#breadcrumbs{height:49px;}
+#intro_blurb_title span {padding:8px 20px 16px 30px;}
+#blurb {padding:40px 0 20px 20px;}
+.jqueryslidemenu ul ul {background-image:none;}
+.jqueryslidemenu ul ul {background-color:#171E26;padding-top:0px;}
+.jqueryslidemenu ul ul.menu_flip {background-image:none;}
+.jqueryslidemenu ul ul.menu_flip {background-color:#171E26;padding-top:0px;}
+.jqueryslidemenuz ul li ul li a:hover, .jqueryslidemenu ul ul li a:hover{margin:0 4px;padding:6px 9px;background:#171E26;color:#eee;}
+.jqueryslidemenu ul ul ul, .jqueryslidemenu ul ul.menu_flip ul {background:none;background-color:#171E26;}
+.jqueryslidemenu ul ul ul, .jqueryslidemenu ul ul.menu_flip ul {background-image:none;}
+#footer form#contactFormWidget {background:none;}
+#footer input#emailWidget, #footer input#contactNameWidget, #footer textarea#commentsTextWidget, #footer .button {background:transparent none repeat scroll 0 0;border:1px solid;}
+#commentsText{border:1px solid #A7A6AA;}
+#comment{border:1px solid #A7A6AA;}
+#footer form#contactFormWidget{background-image:none;}
+#footer input#emailWidget, #footer input#contactNameWidget, #footer textarea#commentsTextWidget, #footer .button {border:1px solid #333;padding-left:0;}
+#footer .button {background-image:none;}
