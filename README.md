@@ -21,10 +21,19 @@ Works! But still more of a prototype, some work still has to be done to make it 
 
 # Installation
 
-	git clone --recursive git@github.com:cmichi/twitterwall.git
+	npm install policyfile
+
+	git clone --recursive https://github.com/cmichi/twitterwall.git
 	cd twitterwall
 	echo "exports.user = 'USER'; exports.pw = 'PW';" > twitter_account.js
 	
 	node server.js
 		
 	curl http://localhost:8004/?hashtag=YOUR_TAG
+
+# Known issues
+
+If you encounter any problems and use Firefox be sure
+that on your `about:config` page `network.websocket.override-security-block`
+is set to `true`.
+

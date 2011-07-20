@@ -100,7 +100,7 @@ function listenForNewTweets(socket) {
 		})
 
 		.addListener('tweet', function(tweet) {
-				consloe.log("@" + tweet.user.screen_name + ": " + 
+				console.log("@" + tweet.user.screen_name + ": " + 
 					tweet.text);
 				cmds = "nextTweet(0, '" + formatText(tweet.text) + 
 						"', '" + tweet.user.profile_image_url + 
