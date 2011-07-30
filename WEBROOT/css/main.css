@@ -13,75 +13,97 @@ body {
 
 h1 {color:#00aeff;}
 
-#logo {position:absolute; top:20px; left:60px;}
-#hashtag {position:absolute; top:20px; right:60px;}
+#logo {position:absolute; top:3%; left:5%;}
+#hashtag {position:absolute; top:3%; right:5%;}
+
+.rows {
+	/*
+	position:absolute;
+	top:30%;
+	*/
+}
 
 .row1 {
-	top:430px;
-	left:60px;
+	top:55%;
+	left:5%;
 }
 
 .row0 {
-	top:130px;
-	left:60px;
+	top:16%;
+	left:5%;
 }
 
 .row {
 	position:absolute;
+	/*
 	overflow:hidden; 
 	text-align: justify;
+	
 	width:1350px;
 	height:240px;
+	*/
+	height:30%;
+	width:90%;
 }
 
 #tweet2, #tweet3 {
-	left:460px !important;	
+	left:34% !important;	
 }
 
 #tweet4, #tweet5 {
-	left:920px !important;	
+	right:0% !important;	
 }
 
 .tweet {
 	position:absolute;
+	/*
 	top:0px;
 	left:0px;
-	
+	*/
 	color:#fff;
-	width:400px;	
+	width:32%;	
+	height:100%;
 }
 
-.tweet .info {height:86px;}
+.tweet .info {height:40%; margin-top:25px;}
 
 .tweet .text {
-	height:120px;
-	width:386px; 
+/*	height:120px;
+	width:386px;  */
 	
+	height:49%;
 	background:#004667;
 	border:2px solid #91c8e1;
 	font-size:12px;
-	padding:16px;
+/*	padding:16px; */
+	padding:2%;
 }
 
 .tweet .text strong {
 	color:#00aeff;
 }
 
-.tweet .author img {
+.tweet .author {
+	/*
 	margin-top:20px;
 	margin-right:10px;
+	*/
+	position:absolute;
+	bottom:0px;
 	width:62px;
 	border:2px solid #91c8e1;	
 }
 
 .tweet .sprechblase {
+	display:none;
 	position:absolute;
-	bottom:41px;
-	left:110px;
+	bottom:22%;
+	left:56%;
 }
 
 .tweet .name {
 	position:absolute;
 	bottom:1px;
+	left:75px;
 	font-size:20px;
 }

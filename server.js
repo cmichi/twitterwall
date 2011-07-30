@@ -84,6 +84,9 @@ function formatText(text) {
 	repl = new RegExp(hashtag, 'gi');
 	text = text.replace(repl, "<strong>" + hashtag + "</strong>");
 
+	text = text.replace(/"/g, "&quot;");
+	text = text.replace(/\n/g, "");
+
 	return text.replace(/'/g, "&rsquo;");
 }
 

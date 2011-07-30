@@ -4,8 +4,8 @@ socket.on('connect', function () {
 	socket.emit('start', getParam("hashtag"));
 	
 	socket.on('cmds', function (data) {
-		eval(data);
 		console.log(data);
+		eval(data);
 		adjustAll();
 	});
 	
@@ -39,11 +39,11 @@ function setTweet(id, text, pic, name) {
 		<span>'+text+'</span>\
 	</div>\
 	\
-	<div class="info"><img src="./img/sprechblase.png" alt="" class="sprechblase" />\
-	<div class="author">\
-		<img src="' + pic + '" alt="" align="left" />\
-		<span class="name">@' + name + '</span>\
-	</div></div>';
+	<img src="./img/sprechblase.png" alt="" class="sprechblase" />\
+	<div class="info">\
+	<img class="author" src="' + pic + '" alt="" align="left" />\
+	<span class="name">@' + name + '</span>\
+	</div>';
 	
 	$('#tweet' + id).html(content);
 }
@@ -58,3 +58,8 @@ function getParam(key) {
 	else
 		return results[1];
 }
+
+
+$(window).resize(function() {
+	setTimeout("adjustAll()", 1000);
+});
