@@ -61,15 +61,22 @@ h1 {color:#00aeff;}
 	left:0px;
 	*/
 	color:#fff;
-	width:32%;	
+	width:30%;	
 	height:100%;
 }
 
-.tweet .info {height:40%; margin-top:25px;}
+.tweet .info {
+	height:40%; margin-top:25px;
+	float:left;
+	}
 
 .tweet .text {
 /*	height:120px;
 	width:386px;  */
+	
+	float:left;
+	clear:both;
+	width:100%;
 	
 	height:49%;
 	background:#004667;
@@ -87,9 +94,11 @@ h1 {color:#00aeff;}
 	/*
 	margin-top:20px;
 	margin-right:10px;
+
+position:absolute;
+bottom:0px;
+
 	*/
-	position:absolute;
-	bottom:0px;
 	width:62px;
 	border:2px solid #91c8e1;	
 }
@@ -102,8 +111,9 @@ h1 {color:#00aeff;}
 }
 
 .tweet .name {
-	position:absolute;
+	margin-left:10px;
+/*	position:absolute;
 	bottom:1px;
 	left:75px;
-	font-size:20px;
+*/	font-size:20px;
 }

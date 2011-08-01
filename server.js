@@ -71,9 +71,14 @@ function getInitialTweets(socket) {
 								tweet.from_user + "'); ";
 					}
 				}
+				cmds += "setHashtag('" + hashtag + "');";
 				socket.emit('cmds', cmds);
 			})
 		})
+}
+
+function setHashtag(tag) {
+	$("h1").html(tag);
 }
 
 
