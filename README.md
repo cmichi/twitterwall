@@ -27,9 +27,11 @@ Works! But still more of a prototype, some work still has to be done to make it 
 	cd twitterwall
 	echo "exports.user = 'USER'; exports.pw = 'PW';" > twitter_account.js
 	
+	# start it
 	node server.js
 		
-	curl http://localhost:8004/?hashtag=YOUR_TAG
+	# open http://localhost:8004/?hashtag=YOUR_TAG
+
 
 # Known issues
 
