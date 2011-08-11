@@ -1,9 +1,0 @@
-[submodule "lib/paperboy"]
-	path = lib/paperboy
-	url = https://github.com/felixge/node-paperboy.git
-[submodule "lib/socket.io"]
-	path = lib/socket.io
-	url = https://github.com/LearnBoost/Socket.IO-node.git
-[submodule "lib/twitter-node"]
-	path = lib/twitter-node
-	url = https://github.com/technoweenie/twitter-node.git
