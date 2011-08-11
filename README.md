@@ -30,7 +30,7 @@ Works! But still more of a prototype, some work still has to be done to make it 
 	# start it
 	node server.js
 		
-	# open http://localhost:8004/?hashtag=YOUR_TAG
+	# open http://localhost:8004/?hashtag=#YOUR_TAG
 
 
 # Known issues

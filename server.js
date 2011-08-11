@@ -3,14 +3,14 @@ var http = require('http'),
 	fs = require('fs'),	
 	path = require('path'),
 
-	paperboy = require('./lib/paperboy'),
+	paperboy = require('./lib/paperboy/paperboy'),
 	TwitterNode = require('./lib/twitter-node')
 		.TwitterNode,
-	io = require('./lib/socket.io'),
+	io = require('./lib/socket.io/socket.io'),
 
 	twitter_account = require('./twitter_account.js');
 
-var hashtag = "#node", // std tag
+var hashtag = "#cccamp11", // std tag
     PORT = 8004,
     WEBROOT = path.join(path.dirname(__filename), 'WEBROOT'),
     options = {
