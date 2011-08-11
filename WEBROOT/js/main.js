@@ -57,6 +57,8 @@ function setHashtag(tag) {
 }
 
 function setTweet(id, text, pic, name) {
+	name = (name.length < 13) ? name : name.substr(0, 11) + "..";
+	
 	var content = '<div class="text" id="tut">\
 		<span>'+text+'</span>\
 	</div>\

@@ -6,7 +6,7 @@ var http = require('http'),
 	paperboy = require('./lib/paperboy/paperboy'),
 	TwitterNode = require('./lib/twitter-node')
 		.TwitterNode,
-	io = require('./lib/socket.io/socket.io'),
+	io = require('./lib/socket.io/lib/socket.io'),
 
 	twitter_account = require('./twitter_account.js');
 
