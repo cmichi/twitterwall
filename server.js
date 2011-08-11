@@ -3,10 +3,10 @@ var http = require('http'),
 	fs = require('fs'),	
 	path = require('path'),
 
-	paperboy = require('./lib/paperboy/lib/paperboy'),
-	TwitterNode = require('./lib/twitter-node/lib/twitter-node')
+	paperboy = require('./lib/paperboy'),
+	TwitterNode = require('./lib/twitter-node')
 		.TwitterNode,
-	io = require('./lib/socket.io/lib/socket.io'),
+	io = require('./lib/socket.io'),
 
 	twitter_account = require('./twitter_account.js');
 
