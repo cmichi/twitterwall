@@ -6,7 +6,7 @@ whereToLoadPriorities[parseInt(Math.random() * 6)] = 0;
 var minTime = 2500;
 
 socket.on('connect', function () {
-	socket.emit('start', getParam("hashtag"));
+	socket.emit('start', getTerm());
 	
 	socket.on('cmds', function (data) {
 		console.log(data);
@@ -83,6 +83,13 @@ function getParam(key) {
 		return results[1];
 }
 
+function getTerm() {
+	var t = (window.location.href).split("?");
+	if (t.length >= 1) 
+		return t[1];
+	else 
+		return "";
+}
 
 $(window).resize(function() {
 	setTimeout("adjustAll()", 1000);

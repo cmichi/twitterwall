@@ -10,7 +10,7 @@ var http = require('http'),
 
 	twitter_account = require('./twitter_account.js');
 
-var hashtag = "cccamp11", // std tag
+var term = "cccamp11", // std tag
     PORT = 8004,
     WEBROOT = path.join(path.dirname(__filename), 'WEBROOT'),
     options = {
@@ -23,7 +23,7 @@ var hashtag = "cccamp11", // std tag
 
 
 if (process.argv[2] != undefined)
-	hashtag = process.argv[2];
+	term = process.argv[2];
 
 
 server = http.createServer(function(req, res) {
@@ -35,9 +35,9 @@ server.listen(PORT);
 
 io = io.listen(server);
 io.sockets.on('connection', function (socket) {
-	socket.on('start', function (url_hashtag) {
-		if (url_hashtag != '') 
-			hashtag = url_hashtag;
+	socket.on('start', function (url_term) {
+		if (url_term != '') 
+			term = url_term;
 
 		getInitialTweets(socket);
 		listenForNewTweets(socket);
@@ -47,7 +47,7 @@ io.sockets.on('connection', function (socket) {
 
 function getInitialTweets(socket) {
 		var bodyarr = [];
-		options.path = options.orig_path + hashtag.replace(/#/g, '%23');
+		options.path = options.orig_path + term.replace(/#/g, '%23');
 		http.get(options, function(res) {
 			res.setEncoding('utf8');
 			res.on('data', function(chunk) {
@@ -71,7 +71,7 @@ function getInitialTweets(socket) {
 								tweet.from_user + "'); ";
 					}
 				}
-				cmds += "setHashtag('#" + hashtag + "');";
+				cmds += "setHashtag('" + term + "');";
 				socket.emit('cmds', cmds);
 			})
 		})
@@ -83,11 +83,14 @@ function setHashtag(tag) {
 
 
 function formatText(text) {
-	repl = new RegExp('#' + hashtag, 'gi');
-	text = text.replace(repl, "<strong>#" + hashtag + "</strong>");
+	repl = new RegExp('#' + term, 'gi');
+	text = text.replace(repl, "<strong>#" + term + "</strong>");
 
-	repl = new RegExp(hashtag, 'gi');
-	text = text.replace(repl, "<strong>" + hashtag + "</strong>");
+	repl = new RegExp('@' + term, 'gi');
+	text = text.replace(repl, "<strong>#" + term + "</strong>");
+
+	repl = new RegExp(term, 'gi');
+	text = text.replace(repl, "<strong>" + term + "</strong>");
 
 	text = text.replace(/"/g, "&quot;");
 	text = text.replace(/\n/g, "");
@@ -100,7 +103,7 @@ function listenForNewTweets(socket) {
 	var twit = new TwitterNode({
 				user: twitter_account.user,
 				password: twitter_account.pw,
-				track: [hashtag],
+				track: [term],
 		});
 
 		twit.addListener('error', function(error) {
