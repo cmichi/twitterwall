@@ -10,7 +10,7 @@ var http = require('http'),
 
 	twitter_account = require('./twitter_account.js');
 
-var hashtag = "#cccamp11", // std tag
+var hashtag = "cccamp11", // std tag
     PORT = 8004,
     WEBROOT = path.join(path.dirname(__filename), 'WEBROOT'),
     options = {
@@ -36,7 +36,7 @@ server.listen(PORT);
 io = io.listen(server);
 io.sockets.on('connection', function (socket) {
 	socket.on('start', function (url_hashtag) {
-		if (url_hashtag.trim() != '') 
+		if (url_hashtag != '') 
 			hashtag = url_hashtag;
 
 		getInitialTweets(socket);
@@ -71,7 +71,7 @@ function getInitialTweets(socket) {
 								tweet.from_user + "'); ";
 					}
 				}
-				cmds += "setHashtag('" + hashtag + "');";
+				cmds += "setHashtag('#" + hashtag + "');";
 				socket.emit('cmds', cmds);
 			})
 		})
