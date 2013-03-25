@@ -1,0 +1,11 @@
+{
+  "author": "Michael Mueller <mich@elmueller.net>",
+  "name": "twitterwall",
+  "description": "Display topic-related tweets in realtime. Using node.js, socket.io & jQuery.",
+  "private": true,
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "3.0.x",
+    "socket.io": "0.9.x"
+  }
+}

@@ -1,42 +1,51 @@
-# Readme
+# Twitterwall
 
-This project aims on providing a pure HTML/CSS/JavaScript Twitterwall.
-
-New tweets are automatically displayed on the wall.
-
-Once the page has been loaded a constant connection to the server is kept (using socket.io). 
-
-The client gets noticed on new tweets and displays them on the wall.
+**Project Status:** Working on a complete rewrite. Project has not
+been modified since two years.
 
 
-# Project status
-
-Works! But still more of a prototype, some work still has to be done to make it a proper project :)
-
-
-# Eye Candy
-
-![Screenshot](https://github.com/cmichi/twitterwall/raw/master/images/thumb.png)
+# ToDo
 
 
 # Installation
 
-	npm install policyfile
-	npm install socket.io-client
+	$ git clone https://github.com/cmichi/twitterwall.git
+	$ cd twitterwall/
 
-	git clone https://github.com/cmichi/twitterwall.git
-	cd twitterwall
-	echo "exports.user = 'USER'; exports.pw = 'PW';" > twitter_account.js
-	
-	# start it
-	node server.js
-		
-	# open http://localhost:8004/?hashtag=#YOUR_TAG
+	# install the necessary dependencies from the package.json
+	$ npm install	
+	$ node server.js
+
+Then open [http://localhost:3000/](http://localhost:3000).
 
 
-# Known issues
+# Libraries & Icons
 
-If you encounter any problems and use Firefox be sure
-that on your `about:config` page `network.websocket.override-security-block`
-is set to `true`.
+ * express
+ * socket.io
 
+
+# License
+
+	Copyright (c) 2013
+
+		Michael Mueller <http://micha.elmueller.net/>
+
+	Permission is hereby granted, free of charge, to any person obtaining
+	a copy of this software and associated documentation files (the
+	"Software"), to deal in the Software without restriction, including
+	without limitation the rights to use, copy, modify, merge, publish,
+	distribute, sublicense, and/or sell copies of the Software, and to
+	permit persons to whom the Software is furnished to do so, subject to
+	the following conditions:
+
+	The above copyright notice and this permission notice shall be
+	included in all copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+	NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+	LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+	OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
