@@ -11,8 +11,6 @@ var twitter = new ntwitter({
 	, access_token_secret: config.access_token_secret
 });
 
-
-
 var app = express();
 app.use(express.static(__dirname + '/static'));
 app.use(express.bodyParser());
@@ -23,6 +21,11 @@ io = io.listen(server);
 server.listen(process.env.PORT || 3000, function() {
 	console.log('Listening on port ' + server.address().port);
 });
+
+
+var streams = {
+	//"cccamp11" : [socket1, socket2, ...]
+};
 
 io.sockets.on('connection', function (socket) {
 	//listenForNewTweets(socket);
