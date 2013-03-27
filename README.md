@@ -4,6 +4,13 @@
 been touched since two years and has to be updated.
 
 
+# ToDo
+
+ * getInitialTweets
+ * don't use an own stream for each user, use an own stream for each key instead
+ * handle twitter connection destroy/reset
+
+
 # Installation
 
 First you should get credentials for accessing the Twitter API.
