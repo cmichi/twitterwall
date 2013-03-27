@@ -23,31 +23,48 @@ server.listen(process.env.PORT || 3000, function() {
 });
 
 
+/* hold all sockets within a streams array, according to their term, 
+   for efficient handling.  */
 var streams = {
 	//"cccamp11" : [socket1, socket2, ...]
 };
 
+
 io.sockets.on('connection', function (socket) {
-	//listenForNewTweets(socket);
 	socket.on('start', function(term){
 		if (term == '' || term == undefined || term == null) 
 			term = "cccamp11";
 
-		getInitialTweets(term, socket);
-		twitter.stream('statuses/filter', {track: term}, function(stream) {
-			stream.on('data', function (tweet) {
-				if (tweet == undefined || tweet.user == undefined || 
-				    tweet.user.screen_name == undefined)
-					return;
+		if (streams[term] != undefined && streams[term].length > 0) {
+			streams[term].push(socket);
+			getInitialTweets(term, socket);
+		} else {
+			streams[term] = [];
+			streams[term].push(socket);
 
-				console.log("@" + tweet.user.screen_name + ": " + tweet.text);
-				cmds = "nextTweet(0, '" + formatText(term, tweet.text) + 
-						"', '" + tweet.user.profile_image_url + 
-						"', '" + tweet.user.screen_name + "');";
-				//console.log("\n\n")
-				socket.emit('new_tweet', cmds);
+			getInitialTweets(term);
+			twitter.stream('statuses/filter', {track: term}, function(stream) {
+				stream.on('data', function (tweet) {
+					if (tweet == undefined || tweet.user == undefined || 
+					    tweet.user.screen_name == undefined)
+						return;
+
+					console.log("@" + tweet.user.screen_name + ": " + tweet.text);
+					cmds = "nextTweet(0, '" + formatText(term, tweet.text) + 
+							"', '" + tweet.user.profile_image_url + 
+							"', '" + tweet.user.screen_name + "');";
+
+					for (var i in streams[term]) {
+						var s = streams[term][i];
+						if (s.disconnected === false) {
+							s.emit('new_tweet', cmds);
+						} else if (s.disconnected === true) {
+							streams[term].pop(s)
+						}
+					}
+				});
 			});
-		});
+		}
 	});
 });
 
@@ -72,13 +89,16 @@ function getInitialTweets(term, socket) {
 					tweet.from_user + "'); ";
 		}
 		cmds += "setHashtag('" + term + "');";
-		socket.emit('cmds', cmds);
+
+		if (socket) {
+			socket.emit('cmds', cmds);
+		} else {
+			console.log(streams[term].length + " !!")
+			for (var i in streams[term]) {
+				streams[term][i].emit('cmds', cmds);
+			}
+		}
 	});
-}
-
-
-function setHashtag(tag) {
-	$("h1").html(tag);
 }
 
 
