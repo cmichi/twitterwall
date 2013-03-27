@@ -102,7 +102,34 @@ function getInitialTweets(term, socket) {
 }
 
 
+function longer(words, count) {
+	for (var i in words) {
+		if (words[i].length > count) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
 function formatText(term, text) {
+	/* is there any word longer than 40 chars? split it for better text displaying! */
+	var count = 25;
+	var words = text.split(" ");
+	for (var i in words) {
+		if (words[i].length > count) {
+			var consume = words[i];
+			var produced = ""
+			while (consume.length > count) {
+				produced += consume.substr(0,count) + " ";
+				consume = consume.substr(count);
+			}
+			produced += consume;
+			text = text.replace(words[i], produced.trim());
+		}
+	}
+
 	repl = new RegExp('#' + term, 'gi');
 	text = text.replace(repl, "<strong>#" + term + "</strong>");
 
