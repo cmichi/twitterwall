@@ -6,6 +6,7 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "3.0.x",
-    "socket.io": "0.9.x"
+    "socket.io": "0.9.x",
+    "ntwitter": "0.5.x"
   }
 }

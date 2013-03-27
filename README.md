@@ -12,6 +12,12 @@ been modified since two years.
 	$ git clone https://github.com/cmichi/twitterwall.git
 	$ cd twitterwall/
 
+	# create a file for twitter auth details
+	$ touch twitter_account.js
+	$ vi twitter_account.js
+	exports.user = 'USER'; 
+	exports.pw = 'PW';
+
 	# install the necessary dependencies from the package.json
 	$ npm install	
 	$ node server.js
