@@ -33,7 +33,7 @@ var streams = {
 io.sockets.on('connection', function (socket) {
 	socket.on('start', function(term){
 		if (term == '' || term == undefined || term == null) 
-			term = "cccamp11";
+			term = "node.js";
 
 		if (streams[term] != undefined && streams[term].length > 0) {
 			streams[term].push(socket);
