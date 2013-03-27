@@ -1,22 +1,25 @@
 # Twitterwall
 
 **Project Status:** Working on a complete rewrite. Project has not
-been modified since two years.
-
-
-# ToDo
+been touched since two years and has to be updated.
 
 
 # Installation
+
+First you should get credentials for accessing the Twitter API.
+Those can be obtained via [dev.twitter.com](http://dev.twitter.com) after 
+[setting up a new app](https://dev.twitter.com/apps/new).
 
 	$ git clone https://github.com/cmichi/twitterwall.git
 	$ cd twitterwall/
 
 	# create a file for twitter auth details
-	$ touch twitter_account.js
-	$ vi twitter_account.js
-	exports.user = 'USER'; 
-	exports.pw = 'PW';
+	$ cat > config.js
+	exports.consumer_key = 'key';
+	exports.consumer_secret = 'secret';
+	exports.access_token_key = 'key';
+	exports.access_token_secret = 'secret';
+	^C
 
 	# install the necessary dependencies from the package.json
 	$ npm install	
@@ -29,6 +32,7 @@ Then open [http://localhost:3000/](http://localhost:3000).
 
  * express
  * socket.io
+ * [ntwitter](https://github.com/AvianFlu/ntwitter)
 
 
 # License

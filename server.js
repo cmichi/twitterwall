@@ -1,24 +1,30 @@
 var express = require('express');
 var io = require('socket.io');
 var http = require('http');
-var TwitterNode = require('./lib/twitter-node').TwitterNode;
+
+var config = require('./config.js');
+var ntwitter = require('ntwitter');
+var twitter = new ntwitter({
+	consumer_key: config.consumer_key
+	, consumer_secret: config.consumer_secret
+	, access_token_key: config.access_token_key
+	, access_token_secret: access_token_secret
+});
+
+var tcredentials = require('./tcredentials.js');
+var twitter = require('ntwitter');
+var twit = new twitter(credentials.data);
+var term = "cccamp11";
+
+twitter.stream('statuses/filter', {track: term}, function(stream) {
+	stream.on('data', function (data) {
+		console.log(data);
+	});
+});
 
 var app = express();
 app.use(express.static(__dirname + '/static'));
 app.use(express.bodyParser());
-
-
-var twitter_account = require('./twitter_account.js');
-
-var term = "cccamp11", // std tag
-    options = {
-		host: 'search.twitter.com',
-		port: 80,
-		orig_path: '/search.json?q=',
-		path: '',
-		method: 'GET'
-    };
-
 
 var server = require('http').createServer(app);
 io = io.listen(server);
@@ -26,7 +32,6 @@ io = io.listen(server);
 server.listen(process.env.PORT || 3000, function() {
 	console.log('Listening on port ' + server.address().port);
 });
-
 
 io.sockets.on('connection', function (socket) {
 	//if (url_term != '') 
