@@ -1,7 +1,7 @@
 # Twitterwall
 
-**Project Status:** Working on a complete rewrite. Project has not
-been touched since two years and has to be updated.
+**Project Status:** The wall works, basically. I am now working on
+extending the project.
 
 
 # ToDo
