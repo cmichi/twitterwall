@@ -6,7 +6,6 @@ extending the project.
 
 # ToDo
 
- * preload user images before displaying tweet
  * enable different filtering options (locations, multiple keywords)
  * enable option to change display order (random, linear)
 

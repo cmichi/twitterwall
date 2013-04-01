@@ -47,11 +47,18 @@ function nextTweet(id, text, pic, name) {
 	}
 	
 	$("#tweet" + whereToLoad).css('opacity', 0);
+	preload(pic);
 	setTweet(whereToLoad, text, pic, name);	
 	adjustId(whereToLoad);
 	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200);
 	
 	whereToLoadPriorities[whereToLoad] = (new Date()).getTime();
+}
+
+
+var curr_preload = 0;
+function preload(pic) {
+	$("#preload" + (curr_preload++ % 5)).attr('src', pic);
 }
 
 
