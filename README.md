@@ -1,13 +1,13 @@
 # Twitterwall
 
-**Project Status:** The wall works, basically. I am now working on
-extending the project.
+**Project Status:** The wall works. I am now working on extending the project.
 
 
 # ToDo
 
  * enable different filtering options (locations, multiple keywords)
  * enable option to change display order (random, linear)
+ * show images from tweets
 
 
 # Installation
