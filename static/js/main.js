@@ -23,11 +23,14 @@ socket.on('connect', function () {
 
 function adjustAll() {
 	$('.text').textfill({ maxFontPixels: 190, innerTag: 'span' });
+//	$(".tweet" + id).lettering();
+	
 }
 
 
 function adjustId(id) {
 	$('#tweet' + id + ' .text').textfill({ maxFontPixels: 190, innerTag: 'span' });
+//	$("#tweet" + id).lettering('lines');
 }
 
 
@@ -88,3 +91,5 @@ function getTerm() {
 $(window).resize(function() {
 	setTimeout("adjustAll()", 1000);
 });
+
+
