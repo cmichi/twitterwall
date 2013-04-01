@@ -68,6 +68,10 @@ h1 {color:#00aeff;}
 	padding:2%;
 }
 
+.tweet .text div {
+	text-align: justify;
+}
+
 .tweet .text strong {
 	color:#00aeff;
 }
