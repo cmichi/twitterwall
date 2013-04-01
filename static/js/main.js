@@ -22,12 +22,12 @@ socket.on('connect', function () {
 	
 
 function adjustAll() {
-	$('.text').textfill({ maxFontPixels: 190, innerTag: 'span' });
+	$('.text').textfill({ maxFontPixels: 190, innerTag: 'div' });
 }
 
 
 function adjustId(id) {
-	$('#tweet' + id + ' .text').textfill({ maxFontPixels: 190, innerTag: 'span' });
+	$('#tweet' + id + ' .text').textfill({ maxFontPixels: 190, innerTag: 'div' });
 }
 
 
@@ -64,7 +64,7 @@ function setTweet(id, text, pic, name) {
 	name = (name.length < 11) ? name : name.substr(0, 9) + "..";
 
 	var content = '<div class="text" id="tut">\
-		<span>'+text+'</span>\
+		<div>'+text+'</div>\
 	</div>\
 	\
 	<div class="info">\
