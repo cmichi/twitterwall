@@ -31,7 +31,7 @@ server.listen(process.env.PORT || 3000, function() {
 /* hold all sockets within a streams array, according to their term, 
    for efficient handling.  */
 var streams = {
-	//"cccamp11" : [socket1, socket2, ...]
+	//"searchterm" : [socket1, socket2, ...]
 };
 
 
@@ -41,9 +41,11 @@ io.sockets.on('connection', function (socket) {
 			term = "node.js";
 
 		if (streams[term] != undefined && streams[term].length > 0) {
+			console.log("new client tuning in for " + term);
 			streams[term].push(socket);
 			getInitialTweets(term, socket);
 		} else {
+			console.log("creating new stream for " + term);
 			streams[term] = [];
 			streams[term].push(socket);
 
@@ -59,11 +61,19 @@ io.sockets.on('connection', function (socket) {
 							"', '" + tweet.user.profile_image_url + 
 							"', '" + tweet.user.screen_name + "');";
 
+					if (streams[term].length === 0) {
+						/* no more clients are listening */
+						console.log("destroying stream " + term);
+						stream.destroy();
+					}
+					
+					console.log("pushing new tweet to " + streams[term].length + " clients for " + term);
 					for (var i in streams[term]) {
 						var s = streams[term][i];
 						if (s.disconnected === false) {
 							s.emit('new_tweet', cmds);
 						} else if (s.disconnected === true) {
+							console.log("one user disconneted from " + term);
 							streams[term].pop(s)
 						}
 					}
@@ -74,6 +84,9 @@ io.sockets.on('connection', function (socket) {
 });
 
 
+/* possibly optimise this by buffering the tweets from a stream.
+when clients are already "listening" for tweets about such a term
+this is possible. */
 function getInitialTweets(term, socket) {
 	twitter.search(term, {}, function(err, tweets) {
 		var cmds = "";
