@@ -32,7 +32,7 @@ Those can be obtained via [dev.twitter.com](http://dev.twitter.com) after
 	$ node server.js
 
 Then open [http://localhost:3000/](http://localhost:3000).
-To stream a specific keyword use [http://localhost:3000/?keyword](http://localhost:3000?keyword).
+To stream a specific keyword use [http://localhost:3000/?keyword](http://localhost:3000/?keyword).
 
 
 # Libraries & Icons

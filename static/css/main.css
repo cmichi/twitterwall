@@ -69,6 +69,7 @@ h1 {
 	border:1px solid #91c8e1;
 	font-size:12px;
 	padding:2%;
+	overflow: hidden;
 	font-weight: normal;
 }
 
