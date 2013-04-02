@@ -63,6 +63,7 @@ h1 {color:#00aeff;}
 	border:2px solid #91c8e1;
 	font-size:12px;
 	padding:2%;
+	overflow: hidden;
 }
 
 .tweet .text div {
