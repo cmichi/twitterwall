@@ -7,8 +7,8 @@ else
 var whereToLoadPriorities = [1,1,1, 1,1,1];
 whereToLoadPriorities[parseInt(Math.random() * 6)] = 0;
 
-/* let it stay for minimum 2500ms */
-var minTime = 2500;
+/* let tweets stay for minimum x ms */
+var minTime = 4000;
 
 socket.on('connect', function () {
 	socket.emit('start', getTerm());

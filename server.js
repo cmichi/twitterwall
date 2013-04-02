@@ -17,6 +17,11 @@ app.use(express.bodyParser());
 
 var server = require('http').createServer(app);
 io = io.listen(server);
+if (process.env.PRODUCTION == 1) {
+	console.log("production mode");
+	io.set("transports", ["xhr-polling"]);
+	io.set("polling duration", 10);
+}
 
 server.listen(process.env.PORT || 3000, function() {
 	console.log('Listening on port ' + server.address().port);
