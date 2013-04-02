@@ -1,17 +1,23 @@
+/*
 @font-face {
   font-family: "raleway";
   src: url("../font/Raleway/raleway_thin.ttf")
 }
+*/
 
 body {
 	background:url(../img/bg.png) no-repeat;
 	background-position:left top;
 	padding:0px;
 	margin:0px;
-	font-family: "raleway", "Lucida Sans Unicode","Lucida Grande","Trebuchet MS", Helvetica, Arial, sans-serif;
+/*	font-family: "raleway", "Lucida Sans Unicode","Lucida Grande","Trebuchet MS", Helvetica, Arial, sans-serif;*/
+	font-family: 'Raleway', sans-serif;
 }
 
-h1 {color:#00aeff;}
+h1 {
+	color:#00aeff;
+	font-weight:normal;
+}
 
 #logo {position:absolute; top:3%; left:5%;}
 #hashtag {position:absolute; top:3%; right:5%;}
@@ -51,7 +57,7 @@ h1 {color:#00aeff;}
 .tweet .info {
 	height:40%; margin-top:25px;
 	float:left;
-	}
+}
 
 .tweet .text {
 	float:left;
@@ -60,10 +66,11 @@ h1 {color:#00aeff;}
 	
 	height:49%;
 	background:#004667;
-	border:2px solid #91c8e1;
+	border:1px solid #91c8e1;
 	font-size:12px;
 	padding:2%;
 	overflow: hidden;
+	font-weight: normal;
 }
 
 .tweet .text div {
@@ -76,7 +83,7 @@ h1 {color:#00aeff;}
 
 .tweet .author {
 	width:62px;
-	border:2px solid #91c8e1;	
+	border:1px solid #91c8e1;	
 }
 
 .tweet .name {
@@ -85,10 +92,18 @@ h1 {color:#00aeff;}
 }
 
 .preferences {
-	float: right;
-	margin-top: 25px;
-	margin-left: 6px;
-	height: 26px;
-	width: 26px;
+	position:absolute;
+	bottom: 1%;
+	right: 1%;
 }
 
+.preferences img {
+	width:25px;
+	float:right;
+	margin-left:5px;
+	opacity: 0.3;
+}
+
+.preferences img:hover {
+	opacity: 1.0;
+}
