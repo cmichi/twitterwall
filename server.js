@@ -90,8 +90,8 @@ this is possible. */
 function getInitialTweets(term, socket) {
 	twitter.search(term, {}, function(err, tweets) {
 		var cmds = "";
-		console.log(tweets);
-		console.log(tweets.results.length + " tweets fetched");
+		//console.log(tweets);
+		console.log(tweets.results.length + " initial tweets fetched");
 
 		for (var i = 0; i < 6; i++) {
 			if (tweets.results[i] == undefined)
