@@ -65,6 +65,7 @@ io.sockets.on('connection', function (socket) {
 						/* no more clients are listening */
 						console.log("destroying stream " + term);
 						stream.destroy();
+						return;
 					}
 					
 					console.log("pushing new tweet to " + streams[term].length + " clients for " + term);

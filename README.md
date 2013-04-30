@@ -5,9 +5,10 @@
 
 # ToDo
 
- * enable different filtering options (locations, multiple keywords)
+ * enable different filtering options (locations, multiple keywords, multiple users)
  * enable option to change display order (random, linear)
  * show images from tweets
+ * beware of large json objects from fetched tweets
 
 
 # Installation
