@@ -5,6 +5,7 @@
 
 # ToDo
 
+ * initial loading screen. until first tweets are fetched.
  * enable different filtering options (locations, multiple keywords, multiple users)
  * enable option to change display order (random, linear)
  * show images from tweets
