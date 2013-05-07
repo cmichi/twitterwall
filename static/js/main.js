@@ -101,4 +101,6 @@ $(window).resize(function() {
 	setTimeout("adjustAll()", 1000);
 });
 
-
+$(document).ready(function() {
+	$('.fancybox').fancybox();
+});

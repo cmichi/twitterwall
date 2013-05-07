@@ -18,6 +18,22 @@ First you should get credentials for accessing the Twitter API.
 Those can be obtained via [dev.twitter.com](http://dev.twitter.com) after 
 [setting up a new app](https://dev.twitter.com/apps/new).
 
+The easy way:
+
+	$ npm install twitterwall
+
+	# create a file for twitter auth details
+	$ cat > config.js
+	exports.consumer_key = 'key';
+	exports.consumer_secret = 'secret';
+	exports.access_token_key = 'key';
+	exports.access_token_secret = 'secret';
+	^C
+	
+	$ node server.js
+
+Installing the development version:
+
 	$ git clone https://github.com/cmichi/twitterwall.git
 	$ cd twitterwall/
 
@@ -42,6 +58,7 @@ To stream a specific keyword use [http://localhost:3000/?keyword](http://localho
  * express
  * socket.io
  * [ntwitter](https://github.com/AvianFlu/ntwitter)
+ * [fancybox](http://fancybox.net/)
 
 
 # License
