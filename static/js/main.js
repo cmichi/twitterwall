@@ -92,6 +92,7 @@ function preload(pic) {
 function setTerm(new_term) {
 	term = new_term;
 	$('#term h1').html(new_term);
+	$('input[name=term]').attr({value: new_term});
 }
 
 
@@ -111,13 +112,21 @@ function setTweet(id, tweet) {
 }
 
 
-/* maybe add cookie stuff here? */
+/* get term param from uri */
 function getInitialTerm() {
+	var params = parseuri(window.location.href);
+	if ("term" in params && params.term != undefined)
+		return params.term;
+	else 
+		return standardTerm;
+
+/*
 	var t = (window.location.href).split("?");
-	if (t.length >= 1) 
+	if (t.length >= 1 && t[1] != undefined) 
 		return t[1];
 	else 
 		return standardTerm;
+		*/
 }
 
 
