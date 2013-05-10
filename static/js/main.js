@@ -10,6 +10,8 @@ whereToLoadPriorities[parseInt(Math.random() * 6)] = 0;
 /* let tweets stay for minimum x ms */
 var minTime = 4000;
 
+var initiaed = true;
+
 socket.on('connect', function () {
 	socket.emit('start', getTerm());
 	
@@ -100,6 +102,7 @@ function getTerm() {
 $(window).resize(function() {
 	setTimeout("adjustAll()", 1000);
 });
+
 
 $(document).ready(function() {
 	$('.fancybox').fancybox();

@@ -35,6 +35,14 @@ var streams = {
 };
 
 
+/* hold the last 6 pushed tweets in this object, so that they
+can be send as initial tweets for new client. so they don't
+show a plain website */
+var initial_tweets = {
+	//"searchterm" : [{..}, {..}, ...]
+}
+
+
 io.sockets.on('connection', function (socket) {
 	socket.on('start', function(term){
 		if (term == '' || term == undefined || term == null) 
@@ -57,9 +65,11 @@ io.sockets.on('connection', function (socket) {
 						return;
 
 					console.log("@" + tweet.user.screen_name + ": " + tweet.text);
-					cmds = "nextTweet(0, '" + formatText(term, tweet.text) + 
-							"', '" + tweet.user.profile_image_url + 
-							"', '" + tweet.user.screen_name + "');";
+					var next_tweet = {
+						text: formatText(term, tweet.text),
+						pic: tweet.user.profile_image_url,
+						name: tweet.user.screen_name 
+					};
 
 					if (streams[term].length === 0) {
 						/* no more clients are listening */
@@ -72,7 +82,8 @@ io.sockets.on('connection', function (socket) {
 					for (var i in streams[term]) {
 						var s = streams[term][i];
 						if (s.disconnected === false) {
-							s.emit('new_tweet', cmds);
+							s.emit('new_tweet', next_tweet);
+							addToInitialTweets(next_tweet);
 						} else if (s.disconnected === true) {
 							console.log("one user disconneted from " + term);
 							streams[term].pop(s)
@@ -83,6 +94,15 @@ io.sockets.on('connection', function (socket) {
 		}
 	});
 });
+
+
+function addToInitialTweets(term, tweet) {
+	initial_tweets[term].unshift(tweet);
+
+	/* delete the rest */
+	if (initial_tweets[term].length >== 6)
+		initial_tweets.splice(5, initial_tweets[term].length);
+}
 
 
 /* possibly optimise this by buffering the tweets from a stream.
@@ -99,22 +119,21 @@ function getInitialTweets(term, socket) {
 				break;
 
 			var tweet = tweets.results[i];
-
-			cmds += "setTweet(" + i + ",'" + 
-					formatText(term,
-					tweet.text) + 
-					"','" +	tweet.profile_image_url 
-					+ "','" + 
-					tweet.from_user + "'); ";
+			var next_tweet = {
+				text: formatText(term, tweet.text),
+				pic: tweet.user.profile_image_url,
+				name: tweet.from_user
+			};
 		}
-		cmds += "setHashtag('" + term + "');";
 
 		if (socket) {
-			socket.emit('cmds', cmds);
+			socket.emit('set_hashtag', term);
+			socket.emit('tweet', next_tweet);
 		} else {
-			console.log(streams[term].length + " !!")
+			console.log("emitting initial tweets to " + streams[term].length + " sockets");
 			for (var i in streams[term]) {
-				streams[term][i].emit('cmds', cmds);
+				streams[term][i].emit('set_hashtag', term);
+				streams[term][i].emit('tweet', next_tweet);
 			}
 		}
 	});
