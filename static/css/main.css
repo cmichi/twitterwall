@@ -107,3 +107,25 @@ h1 {
 .preferences img:hover {
 	opacity: 1.0;
 }
+
+#loading_box {
+	position:absolute;
+	width:300px;
+	height:100px;
+	border:1px solid #fff;
+	border-radius:10px;
+	text-align:center;
+	padding-top: 50px;
+	top:30%;
+	left:50%;
+	margin-left:-150px;
+	z-index:9999999;
+	background:rgba(0, 0, 0, 0.4);
+}
+
+#loading_box #label {
+	color:#fff;
+	font-family:'Helvetica Neue',Arial,Helvetica,sans-serif; 
+	font-size:32px;
+}
+

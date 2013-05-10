@@ -77,7 +77,7 @@ io.sockets.on('connection', function (socket) {
 						/* no more clients are listening */
 						console.log("destroying stream " + term);
 						stream.destroy();
-						initial_tweets.pop(term);
+						delete initial_tweets[term];
 						return;
 					}
 					

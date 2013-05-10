@@ -12,9 +12,23 @@ var minLastTime = 4000;
 
 var term;
 
-var initiated = true;
+var initiated = false;
 
 var standardTerm = "node.js";
+
+/*
+var sw = true;
+var sw_cnt = "";
+function swap() {
+	console.log("swap")
+	sw = !sw;
+	  
+	$("#loading_box #label").text("Loading" + sw_cnt);
+	sw_cnt += ".";
+	if (sw_cnt.length === 4) sw_cnt = ".";
+}
+setInterval("swap()", 500);
+*/
 
 socket.on('connect', function () {
 	term = getInitialTerm();
@@ -25,6 +39,10 @@ socket.on('connect', function () {
 	socket.on('new_tweet', function (tweet) {
 		console.log(tweet);
 		newTweet(tweet);
+
+		if (!initiated) {
+			$("#loading_box").hide();
+		}
 	});
 });
 	
@@ -111,3 +129,5 @@ $(window).resize(function() {
 $(document).ready(function() {
 	$('.fancybox').fancybox();
 });
+
+
