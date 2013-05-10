@@ -1,16 +1,14 @@
 # Twitterwall
 
-**Project Status:** The wall works. I am now working on extending the project.
+This is a very basic twitterwall. I am now working on extending the project.
 
 
 # ToDo
 
- * initial loading screen. until first tweets are fetched.
  * enable different filtering options (locations, multiple keywords, multiple users)
  * enable option to change display order (random, linear)
  * show images from tweets
- * beware of large json objects from fetched tweets
- * too much tweets are a problem for the app
+ * beware of streaming heavily trending topics, too much tweets are a problem for the app
 
 
 # Installation
