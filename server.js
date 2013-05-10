@@ -27,6 +27,7 @@ server.listen(process.env.PORT || 3000, function() {
 	console.log('Listening on port ' + server.address().port);
 });
 
+var max_tweets = 6;
 
 /* hold all sockets within a streams array, according to their term, 
    for efficient handling.  */
@@ -35,7 +36,7 @@ var streams = {
 };
 
 
-/* hold the last 6 pushed tweets in this object, so that they
+/* hold the last max_tweets pushed tweets in this object, so that they
 can be send as initial tweets for new client. so they don't
 show a plain website */
 var initial_tweets = {
@@ -83,7 +84,7 @@ io.sockets.on('connection', function (socket) {
 						var s = streams[term][i];
 						if (s.disconnected === false) {
 							s.emit('new_tweet', next_tweet);
-							addToInitialTweets(next_tweet);
+							addToInitialTweets(term, next_tweet);
 						} else if (s.disconnected === true) {
 							console.log("one user disconneted from " + term);
 							streams[term].pop(s)
@@ -100,8 +101,8 @@ function addToInitialTweets(term, tweet) {
 	initial_tweets[term].unshift(tweet);
 
 	/* delete the rest */
-	if (initial_tweets[term].length >== 6)
-		initial_tweets.splice(5, initial_tweets[term].length);
+	if (initial_tweets[term].length >= max_tweets)
+		initial_tweets.splice(max_tweets - 1, initial_tweets[term].length);
 }
 
 
@@ -114,20 +115,20 @@ function getInitialTweets(term, socket) {
 		//console.log(tweets);
 		console.log(tweets.results.length + " initial tweets fetched");
 
-		for (var i = 0; i < 6; i++) {
+		for (var i = 0; i < max_tweets; i++) {
 			if (tweets.results[i] == undefined)
 				break;
 
 			var tweet = tweets.results[i];
+			console.log(tweet)
 			var next_tweet = {
 				text: formatText(term, tweet.text),
-				pic: tweet.user.profile_image_url,
+				pic: tweet.profile_image_url,
 				name: tweet.from_user
 			};
 		}
 
 		if (socket) {
-			socket.emit('set_hashtag', term);
 			socket.emit('tweet', next_tweet);
 		} else {
 			console.log("emitting initial tweets to " + streams[term].length + " sockets");

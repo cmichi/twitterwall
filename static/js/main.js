@@ -5,25 +5,22 @@ else
 	var socket = io.connect('http://localhost');
 
 var whereToLoadPriorities = [1,1,1, 1,1,1];
-whereToLoadPriorities[parseInt(Math.random() * 6)] = 0;
+whereToLoadPriorities[parseInt(Math.random() * 6)] = 0; /* intial random position */
 
 /* let tweets stay for minimum x ms */
-var minTime = 4000;
+var minLastTime = 4000;
 
-var initiaed = true;
+var term;
+
+var initiated = true;
 
 socket.on('connect', function () {
-	socket.emit('start', getTerm());
+	term = setTerm(getUriTerm());
+	socket.emit('start', term);
 	
-	socket.on('cmds', function (data) {
+	socket.on('new_tweet', function (tweet) {
 		console.log(data);
-		eval(data);
-		adjustAll();
-	});
-	
-	socket.on('new_tweet', function (data) {
-		console.log(data);
-		eval(data);
+		newTweet(tweet);
 	});
 });
 	
@@ -39,27 +36,28 @@ function adjustId(id) {
 
 
 /* load the next tweet into the visible area */
-function nextTweet(id, text, pic, name) {	
+function newTweet(tweet) {	
 	var currTs = (new Date()).getTime();
 	
+	/* determine in which grid position to load the tweet */
 	var whereToLoad = 0;
-	var min = whereToLoadPriorities[0];
 	
-	/* whereToLoad ist dort wo timestamp am kleinsten ist */
-	for (var a = 1; a < 6; a++) {
-		/* we have to ensure that the time a tweet lasts is > minTime */
-		if (whereToLoadPriorities[a] < min && 
-			currTs - whereToLoadPriorities[a] > minTime)
+	/* whereToLoad is where the timestamp is the lowest (meaning the
+	   tweet has been displayed for the longest time) */
+	for (var a = 0; a <= whereToLoadPriorities.length; a++) {
+		/* we have to ensure that the time a tweet lasts is > minLastTime */
+		if (whereToLoadPriorities[a] <= whereToLoadPriorities[whereToLoad])
 			whereToLoad = a;
 	}
 	
 	$("#tweet" + whereToLoad).css('opacity', 0);
 	preload(pic);
-	setTweet(whereToLoad, text, pic, name);	
+	setTweet(whereToLoad, tweet);	
 	adjustId(whereToLoad);
 	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200);
 	
 	whereToLoadPriorities[whereToLoad] = (new Date()).getTime();
+	//adjustAll();
 }
 
 
@@ -69,28 +67,29 @@ function preload(pic) {
 }
 
 
-function setHashtag(tag) {
-	$('#hashtag h1').html(tag);
+function setTerm(new_term) {
+	term = new_term;
+	$('#term h1').html(new_term);
 }
 
 
-function setTweet(id, text, pic, name) {
-	name = (name.length < 30) ? name : name.substr(0, 30) + "..";
+function setTweet(id, tweet) {
+	name = (tweet.name.length < 30) ? tweet.name : tweet.name.substr(0, 30) + "..";
 
 	var content = '<div class="text" id="tut">\
-		<div>'+text+'</div>\
+		<div>' + tweet.text + '</div>\
 	</div>\
 	\
 	<div class="info">\
-		<img class="author" src="' + pic + '" alt="" align="left" />\
-		<span class="name">@' + name + '</span>\
+		<img class="author" src="' + tweet.pic + '" alt="" align="left" />\
+		<span class="name">@' + tweet.name + '</span>\
 	</div>';
 	
 	$('#tweet' + id).html(content);
 }
 
 
-function getTerm() {
+function getUriTerm() {
 	var t = (window.location.href).split("?");
 	if (t.length >= 1) 
 		return t[1];
