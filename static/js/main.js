@@ -111,7 +111,7 @@ function pushQueue(tweet) {
 function isTweetDisplayed(tweet) {
 	/* check if tweet is not already displayed */
 	for (var i in displayed_tweets) {
-		console.log(displayed_tweets[i] + " == " + tweet.id);
+		// console.log(displayed_tweets[i] + " == " + tweet.id);
 		if (displayed_tweets[i] == tweet.id)
 			return true;
 	}
@@ -121,7 +121,7 @@ function isTweetDisplayed(tweet) {
 
 
 function workQueue() {
-	console.log("checking queue...");
+	// console.log("checking queue...");
 	/* are there tweets which have already exhausted minLastTime? */
 	var now = (new Date()).getTime();
 
