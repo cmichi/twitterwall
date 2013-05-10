@@ -30,7 +30,7 @@ socket.on('connect', function () {
 		/* are there already enough tweets displayed? */
 		if (displayed_tweets.length === max_tweets) {
 			pushQueue(tweet);
-		} else {
+		} else if (isTweetDisplayed(tweet) === false) {
 			newTweet(tweet);
 		}
 
@@ -100,15 +100,23 @@ function pushQueue(tweet) {
 		console.log("omitting tweet. queue full.");
 		return;
 	} else {
-		/* check if tweet is not already displayed */
-		for (var i in displayed_tweets) {
-			if (displayed_tweets[i] == tweet.id)
-				return;
-		}
+		if (isTweetDisplayed(tweet)) return;
 
 		console.log("pushing tweet to queue (size: " + queue.length + ").");
 		queue.push(tweet);
 	}
+}
+
+
+function isTweetDisplayed(tweet) {
+	/* check if tweet is not already displayed */
+	for (var i in displayed_tweets) {
+		console.log(displayed_tweets[i] + " == " + tweet.id);
+		if (displayed_tweets[i] == tweet.id)
+			return true;
+	}
+
+	return false;
 }
 
 
@@ -121,8 +129,12 @@ function workQueue() {
 		var display_time = now - whereToLoadPriorities[a];
 		// console.log(display_time)
 		if (display_time >= minLastTime && queue.length > 0) {
+			if (isTweetDisplayed(queue[0])) 
+				continue;
+
 			console.log("taking tweet from queue");
 			newTweet(queue.splice(0,1)[0]);
+			//return;
 		}
 	}
 	
