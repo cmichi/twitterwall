@@ -9,7 +9,7 @@ whereToLoadPriorities[parseInt(Math.random() * 6)] = 0; /* intial random positio
 
 /* let tweets stay for minimum x ms */
 var minLastTime = 5000;
-//var minLastTime = 4000;
+var checkTime = 1000;
 
 var term;
 var initiated = false;
@@ -20,11 +20,11 @@ var standardTerm = "node.js";
 var sw = true;
 var sw_cnt = ".";
 function swap() {
-  sw = !sw;
-    
-  $("#loading_box #label").text("Loading" + sw_cnt);
-  sw_cnt += ".";
-  if (sw_cnt.length === 4) sw_cnt = ".";
+	sw = !sw;
+
+	$("#loading_box #label").text("Loading" + sw_cnt);
+	sw_cnt += ".";
+	if (sw_cnt.length === 4) sw_cnt = ".";
 }
 setInterval("swap()", 500);
 
@@ -145,12 +145,13 @@ function workQueue() {
 
 			console.log("taking tweet from queue");
 			newTweet(queue.splice(0,1)[0]);
-			//return;
+			return; /* only one each time, otherwise there is
+			too much movement in the wall  */
 		}
 	}
 	
 }
-setInterval("workQueue()", minLastTime);
+setInterval("workQueue()", checkTime);
 
 
 var curr_preload = 0;
@@ -167,7 +168,7 @@ function setTerm(new_term) {
 
 
 function setTweet(id, tweet) {
-	name = (tweet.name.length < 30) ? tweet.name : tweet.name.substr(0, 30) + "..";
+	name = (tweet.name.length < 17) ? tweet.name : tweet.name.substr(0, 15) + "..";
 
 	var content = '<div class="text" id="tut">\
 		<div>' + tweet.text + '</div>\
