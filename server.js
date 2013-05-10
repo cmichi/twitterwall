@@ -68,6 +68,7 @@ io.sockets.on('connection', function (socket) {
 
 					console.log("@" + tweet.user.screen_name + ": " + tweet.text);
 					var next_tweet = {
+						id: tweet.id,
 						text: formatText(term, tweet.text),
 						pic: tweet.user.profile_image_url,
 						name: tweet.user.screen_name 
@@ -124,6 +125,7 @@ function getInitialTweets(term, socket) {
 			var tweet = tweets.results[i];
 			console.log(tweet)
 			var next_tweet = {
+				id: tweet.id,
 				text: formatText(term, tweet.text),
 				pic: tweet.profile_image_url,
 				name: tweet.from_user

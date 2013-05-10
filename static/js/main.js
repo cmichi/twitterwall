@@ -8,11 +8,12 @@ var whereToLoadPriorities = [1,1,1, 1,1,1];
 whereToLoadPriorities[parseInt(Math.random() * 6)] = 0; /* intial random position */
 
 /* let tweets stay for minimum x ms */
-var minLastTime = 4000;
+var minLastTime = 5000;
+//var minLastTime = 4000;
 
 var term;
 var initiated = false;
-var displayed_tweets = 0;
+var displayed_tweets = [];
 var max_tweets = 6;
 var standardTerm = "node.js";
 
@@ -27,7 +28,7 @@ socket.on('connect', function () {
 		console.log(tweet);
 
 		/* are there already enough tweets displayed? */
-		if (displayed_tweets === max_tweets) {
+		if (displayed_tweets.length === max_tweets) {
 			pushQueue(tweet);
 		} else {
 			newTweet(tweet);
@@ -58,6 +59,7 @@ var max_queue_size = 6;
 BUG: the problem here is, that new tweets get loaded __immediately__.
 So if you have many many tweets streaming in, this won't work out well. */
 function newTweet(tweet) {	
+	console.log(tweet);
 	var currTs = (new Date()).getTime();
 	
 	/* determine in which grid position to load the tweet */
@@ -65,7 +67,7 @@ function newTweet(tweet) {
 	
 	/* whereToLoad is where the timestamp is the lowest (meaning the
 	   tweet has been displayed for the longest time) */
-	for (var a = 0; a <= whereToLoadPriorities.length; a++) {
+	for (var a = 0; a < max_tweets; a++) {
 		/* we have to ensure that the time a tweet lasts is > minLastTime */
 		if (whereToLoadPriorities[a] <= whereToLoadPriorities[whereToLoad])
 			whereToLoad = a;
@@ -76,7 +78,10 @@ function newTweet(tweet) {
 	setTweet(whereToLoad, tweet);	
 	adjustId(whereToLoad);
 	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200);
-	displayed_tweets = (displayed_tweets % max_tweets);
+
+	displayed_tweets.push(tweet.id);
+	if (displayed_tweets.length > max_tweets)
+		displayed_tweets.splice(0,1);
 	
 	whereToLoadPriorities[whereToLoad] = (new Date()).getTime();
 }
@@ -95,6 +100,12 @@ function pushQueue(tweet) {
 		console.log("omitting tweet. queue full.");
 		return;
 	} else {
+		/* check if tweet is not already displayed */
+		for (var i in displayed_tweets) {
+			if (displayed_tweets[i] == tweet.id)
+				return;
+		}
+
 		console.log("pushing tweet to queue (size: " + queue.length + ").");
 		queue.push(tweet);
 	}
@@ -102,13 +113,16 @@ function pushQueue(tweet) {
 
 
 function workQueue() {
+	console.log("checking queue...");
 	/* are there tweets which have already exhausted minLastTime? */
 	var now = (new Date()).getTime();
 
-	for (var a = 0; a <= whereToLoadPriorities.length; a++) {
-		var display_time = whereToLoadPriorities[a] - now;
+	for (var a = 0; a < max_tweets; a++) {
+		var display_time = now - whereToLoadPriorities[a];
+		// console.log(display_time)
 		if (display_time >= minLastTime && queue.length > 0) {
-			newTweet(queue.splice(0,1));
+			console.log("taking tweet from queue");
+			newTweet(queue.splice(0,1)[0]);
 		}
 	}
 	
