@@ -23,7 +23,13 @@ socket.on('connect', function () {
 	
 	socket.on('new_tweet', function (tweet) {
 		console.log(tweet);
-		newTweet(tweet);
+
+		/* are there already enough tweets displayed? */
+		if (displayed_tweets === max_tweets) {
+			queue.push(tweet);
+		} else {
+			newTweet(tweet);
+		}
 
 		if (!initiated) {
 			$("#loading_box").hide();
@@ -41,8 +47,12 @@ function adjustId(id) {
 	$('#tweet' + id + ' .text').textfill({ maxFontPixels: 190, innerTag: 'div' });
 }
 
+var queue = [];
 
-/* load the next tweet into the visible area */
+/* load the next tweet into the visible area.
+
+BUG: the problem here is, that new tweets get loaded __immediately__.
+So if you have many many tweets streaming in, this won't work out well. */
 function newTweet(tweet) {	
 	var currTs = (new Date()).getTime();
 	
@@ -56,7 +66,7 @@ function newTweet(tweet) {
 		if (whereToLoadPriorities[a] <= whereToLoadPriorities[whereToLoad])
 			whereToLoad = a;
 	}
-	
+
 	$("#tweet" + whereToLoad).css('opacity', 0);
 	preload(tweet.pic);
 	setTweet(whereToLoad, tweet);	
@@ -64,8 +74,22 @@ function newTweet(tweet) {
 	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200);
 	
 	whereToLoadPriorities[whereToLoad] = (new Date()).getTime();
-	//adjustAll();
 }
+
+
+function workQueue() {
+	/* are there tweets which have already exhausted minLastTime? */
+	var now = (new Date()).getTime();
+
+	for (var a = 0; a <= whereToLoadPriorities.length; a++) {
+		var display_time = whereToLoadPriorities[a] - now;
+		if (display_time >= minLastTime && queue.length > 0) {
+			newTweet(queue.splice(0,1));
+		}
+	}
+	
+}
+setInterval("workQueue()", minLastTime);
 
 
 var curr_preload = 0;
