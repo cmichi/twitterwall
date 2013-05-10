@@ -51,7 +51,7 @@ Installing the development version:
 	$ node server.js
 
 Then open [http://localhost:3000/](http://localhost:3000).
-To stream a specific keyword use [http://localhost:3000/?keyword](http://localhost:3000/?keyword).
+To stream a specific keyword use [http://localhost:3000/?term=keyword](http://localhost:3000/?term=keyword).
 
 
 # Libraries & Icons

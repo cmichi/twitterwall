@@ -134,17 +134,6 @@ function getInitialTweets(term, socket) {
 				socket.emit('new_tweet', next_tweet);
 			} 
 		}
-
-
-		/*
-		else {
-			console.log("emitting initial tweets to " + streams[term].length + " sockets");
-			for (var i in streams[term]) {
-				streams[term][i].emit('set_hashtag', term);
-				streams[term][i].emit('new_tweet', next_tweet);
-			}
-		}
-		*/
 	});
 }
 

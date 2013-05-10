@@ -11,24 +11,9 @@ whereToLoadPriorities[parseInt(Math.random() * 6)] = 0; /* intial random positio
 var minLastTime = 4000;
 
 var term;
-
 var initiated = false;
-
 var standardTerm = "node.js";
 
-/*
-var sw = true;
-var sw_cnt = "";
-function swap() {
-	console.log("swap")
-	sw = !sw;
-	  
-	$("#loading_box #label").text("Loading" + sw_cnt);
-	sw_cnt += ".";
-	if (sw_cnt.length === 4) sw_cnt = ".";
-}
-setInterval("swap()", 500);
-*/
 
 socket.on('connect', function () {
 	term = getInitialTerm();
@@ -119,14 +104,6 @@ function getInitialTerm() {
 		return params.term;
 	else 
 		return standardTerm;
-
-/*
-	var t = (window.location.href).split("?");
-	if (t.length >= 1 && t[1] != undefined) 
-		return t[1];
-	else 
-		return standardTerm;
-		*/
 }
 
 
