@@ -26,7 +26,7 @@ socket.on('connect', function () {
 
 		/* are there already enough tweets displayed? */
 		if (displayed_tweets === max_tweets) {
-			queue.push(tweet);
+			pushQueue(tweet);
 		} else {
 			newTweet(tweet);
 		}
@@ -47,7 +47,9 @@ function adjustId(id) {
 	$('#tweet' + id + ' .text').textfill({ maxFontPixels: 190, innerTag: 'div' });
 }
 
+
 var queue = [];
+var max_queue_size = 6;
 
 /* load the next tweet into the visible area.
 
@@ -74,6 +76,22 @@ function newTweet(tweet) {
 	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200);
 	
 	whereToLoadPriorities[whereToLoad] = (new Date()).getTime();
+}
+
+
+function pushQueue(tweet) {
+	/* if queue full, simply append the new element to the end 
+	if (queue.length > max_queue_size)
+		queue.splice(max_queue_size, queue.length);
+
+	queue.push(tweet);
+	*/
+
+	/* if queue full, simply ommit tweet */
+	if (queue.length > max_queue_size)
+		return;
+	else 
+		queue.push(tweet);
 }
 
 
