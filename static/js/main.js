@@ -17,6 +17,17 @@ var displayed_tweets = [];
 var max_tweets = 6;
 var standardTerm = "node.js";
 
+var sw = true;
+var sw_cnt = ".";
+function swap() {
+  sw = !sw;
+    
+  $("#loading_box #label").text("Loading" + sw_cnt);
+  sw_cnt += ".";
+  if (sw_cnt.length === 4) sw_cnt = ".";
+}
+setInterval("swap()", 500);
+
 
 socket.on('connect', function () {
 	term = getInitialTerm();
