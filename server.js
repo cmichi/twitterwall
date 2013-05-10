@@ -89,8 +89,8 @@ io.sockets.on('connection', function (socket) {
 							s.emit('new_tweet', next_tweet);
 							addToInitialTweets(term, next_tweet);
 						} else if (s.disconnected === true) {
-							console.log("one user disconneted from " + term);
-							streams[term].pop(s)
+							console.log("one user disconnected from " + term);
+							streams[term].splice(i, i+1);
 						}
 					}
 				});
