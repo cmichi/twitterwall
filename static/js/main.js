@@ -114,7 +114,7 @@ function setTweet(id, tweet) {
 
 /* get term param from uri */
 function getInitialTerm() {
-	var params = parseuri(window.location.href);
+	var params = parseUri(window.location.href).queryKey;
 	if ("term" in params && params.term != undefined)
 		return params.term;
 	else 

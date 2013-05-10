@@ -104,7 +104,7 @@ function addToInitialTweets(term, tweet) {
 
 	/* delete the rest */
 	if (initial_tweets[term].length > max_tweets)
-		initial_tweets[term].splice(max_tweets - 1, initial_tweets[term].length);
+		initial_tweets[term].splice(max_tweets, initial_tweets[term].length);
 }
 
 

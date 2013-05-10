@@ -60,6 +60,7 @@ To stream a specific keyword use [http://localhost:3000/?keyword](http://localho
  * socket.io
  * [ntwitter](https://github.com/AvianFlu/ntwitter)
  * [fancybox](http://fancybox.net/)
+ * [parseUri](http://stevenlevithan.com/demo/parseuri/js/assets/parseuri.js)
 
 
 # License
