@@ -12,6 +12,8 @@ var minLastTime = 4000;
 
 var term;
 var initiated = false;
+var displayed_tweets = 0;
+var max_tweets = 6;
 var standardTerm = "node.js";
 
 
@@ -74,6 +76,7 @@ function newTweet(tweet) {
 	setTweet(whereToLoad, tweet);	
 	adjustId(whereToLoad);
 	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200);
+	displayed_tweets = (displayed_tweets % max_tweets);
 	
 	whereToLoadPriorities[whereToLoad] = (new Date()).getTime();
 }
@@ -87,11 +90,14 @@ function pushQueue(tweet) {
 	queue.push(tweet);
 	*/
 
-	/* if queue full, simply ommit tweet */
-	if (queue.length > max_queue_size)
+	/* if queue full, simply omit tweet */
+	if (queue.length > max_queue_size) {
+		console.log("omitting tweet. queue full.");
 		return;
-	else 
+	} else {
+		console.log("pushing tweet to queue (size: " + queue.length + ").");
 		queue.push(tweet);
+	}
 }
 
 
