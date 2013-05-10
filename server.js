@@ -52,13 +52,14 @@ io.sockets.on('connection', function (socket) {
 		if (streams[term] != undefined && streams[term].length > 0) {
 			console.log("new client tuning in for " + term);
 			streams[term].push(socket);
-			getInitialTweets(term, socket);
+			sendInitialTweets(term, socket);
 		} else {
 			console.log("creating new stream for " + term);
 			streams[term] = [];
+			initial_tweets[term] = [];
 			streams[term].push(socket);
 
-			getInitialTweets(term);
+			sendInitialTweets(term, socket);
 			twitter.stream('statuses/filter', {track: term}, function(stream) {
 				stream.on('data', function (tweet) {
 					if (tweet == undefined || tweet.user == undefined || 
@@ -76,6 +77,7 @@ io.sockets.on('connection', function (socket) {
 						/* no more clients are listening */
 						console.log("destroying stream " + term);
 						stream.destroy();
+						initial_tweets.pop(term);
 						return;
 					}
 					
@@ -101,8 +103,8 @@ function addToInitialTweets(term, tweet) {
 	initial_tweets[term].unshift(tweet);
 
 	/* delete the rest */
-	if (initial_tweets[term].length >= max_tweets)
-		initial_tweets.splice(max_tweets - 1, initial_tweets[term].length);
+	if (initial_tweets[term].length > max_tweets)
+		initial_tweets[term].splice(max_tweets - 1, initial_tweets[term].length);
 }
 
 
@@ -126,18 +128,35 @@ function getInitialTweets(term, socket) {
 				pic: tweet.profile_image_url,
 				name: tweet.from_user
 			};
+
+			if (socket) {
+				addToInitialTweets(term, next_tweet);
+				socket.emit('new_tweet', next_tweet);
+			} 
 		}
 
-		if (socket) {
-			socket.emit('tweet', next_tweet);
-		} else {
+
+		/*
+		else {
 			console.log("emitting initial tweets to " + streams[term].length + " sockets");
 			for (var i in streams[term]) {
 				streams[term][i].emit('set_hashtag', term);
-				streams[term][i].emit('tweet', next_tweet);
+				streams[term][i].emit('new_tweet', next_tweet);
 			}
 		}
+		*/
 	});
+}
+
+
+function sendInitialTweets(term, socket) {
+	if (term in initial_tweets && initial_tweets[term].length > 0) {
+		for (var i in initial_tweets[term])
+			socket.emit('new_tweet', initial_tweets[term][i]);
+		
+	} else {
+		getInitialTweets(term, socket);
+	}
 }
 
 

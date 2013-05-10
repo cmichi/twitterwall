@@ -10,6 +10,7 @@
  * enable option to change display order (random, linear)
  * show images from tweets
  * beware of large json objects from fetched tweets
+ * too much tweets are a problem for the app
 
 
 # Installation

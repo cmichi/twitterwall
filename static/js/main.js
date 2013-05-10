@@ -14,12 +14,16 @@ var term;
 
 var initiated = true;
 
+var standardTerm = "node.js";
+
 socket.on('connect', function () {
-	term = setTerm(getUriTerm());
+	term = getInitialTerm();
+	setTerm(term);
+	console.log("starting with " + term);
 	socket.emit('start', term);
 	
 	socket.on('new_tweet', function (tweet) {
-		console.log(data);
+		console.log(tweet);
 		newTweet(tweet);
 	});
 });
@@ -51,7 +55,7 @@ function newTweet(tweet) {
 	}
 	
 	$("#tweet" + whereToLoad).css('opacity', 0);
-	preload(pic);
+	preload(tweet.pic);
 	setTweet(whereToLoad, tweet);	
 	adjustId(whereToLoad);
 	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200);
@@ -89,12 +93,13 @@ function setTweet(id, tweet) {
 }
 
 
-function getUriTerm() {
+/* maybe add cookie stuff here? */
+function getInitialTerm() {
 	var t = (window.location.href).split("?");
 	if (t.length >= 1) 
 		return t[1];
 	else 
-		return "";
+		return standardTerm;
 }
 
 

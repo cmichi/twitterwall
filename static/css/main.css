@@ -20,8 +20,8 @@ h1 {
 }
 
 #logo {position:absolute; top:3%; left:5%;}
-#hashtag {position:absolute; top:3%; right:5%;}
-#hashtag h1 {float:left;}
+#term {position:absolute; top:3%; right:5%;}
+#term h1 {float:left;}
 
 .row1 {
 	top:55%;
