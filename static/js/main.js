@@ -187,9 +187,14 @@ function setTweet(id, tweet) {
 function getInitialTerm() {
 	var params = parseUri(window.location.href).queryKey;
 	if ("term" in params && params.term != undefined)
-		return params.term;
+		return decodeURIComponent(params.term);
 	else 
 		return standardTerm;
+}
+
+
+function submit(frm) {
+	form.action = location.href + '/' + encodeURIComponent($('input[name=term]').value);
 }
 
 
