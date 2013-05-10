@@ -71,11 +71,26 @@
 	<div id="dialog" style="display:none; width:400px;">
 		<h1>Preferences</h1>
 
-		<form action="#" onsubmit="submit(this)">
-			<label for="term">Term:</label>
-			<input name="term" value="" />
+		<p>
+			What are you searching for? 
+		</p>
 
-			<input type="submit" value="Apply" />
+		<p>
+			You can simply type in hashtags
+			or terms. You can also build more complicated search terms,
+			see <a href="https://dev.twitter.com/docs/streaming-apis/parameters#track">here</a> 
+			for more details.
+		</p>
+
+		<form action="#" onsubmit="submit(this)">
+			<p>
+				<label for="term">Term:</label>
+				<input name="term" value="" />
+			</p>
+
+			<p>
+				<input type="submit" value="Apply" />
+			</p>
 		</form>
 	</div>
  
