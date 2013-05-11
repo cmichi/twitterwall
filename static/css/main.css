@@ -79,6 +79,7 @@ h1 {
 
 .tweet .text strong {
 	color:#00aeff;
+	font-weight:normal;
 }
 
 .tweet .author {
