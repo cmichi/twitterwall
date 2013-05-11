@@ -115,7 +115,8 @@ h1 {
 	border:1px solid #fff;
 	border-radius:10px;
 	text-align:center;
-	padding-top: 50px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	top:30%;
 	left:50%;
 	margin-left:-150px;

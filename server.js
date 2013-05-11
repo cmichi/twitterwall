@@ -85,6 +85,7 @@ io.sockets.on('connection', function (socket) {
 						return;
 					}
 					
+					console.log("New tweet coming in for " + streams[term].length + " clients for " + term);
 					for (var i in streams[term]) {
 						var s = streams[term][i];
 						if (s.disconnected === false) {
@@ -93,11 +94,11 @@ io.sockets.on('connection', function (socket) {
 							it does not make sense to send them all to the 
 							client. some have to be ommitted. */
 							if (s.tweetsSendInThisSlot > max_tweets + queue_size) {
-								console.log("slot already exhausted. omitting tweets.");
+								console.log("slot already exhausted. omitting tweet for client.");
 								continue;
 							}
 
-							console.log("pushing new tweet to " + streams[term].length + " clients for " + term);
+							console.log("pushing new tweet to client for " + term);
 							s.emit('new_tweet', next_tweet);
 							s.tweetsSendInThisSlot++;
 							addToInitialTweets(term, next_tweet);

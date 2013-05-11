@@ -17,17 +17,6 @@ var displayed_tweets = [];
 var max_tweets = 6;
 var standardTerm = "node.js";
 
-var sw = true;
-var sw_cnt = ".";
-function swap() {
-	sw = !sw;
-
-	$("#loading_box #label").text("Loading" + sw_cnt);
-	sw_cnt += ".";
-	if (sw_cnt.length === 4) sw_cnt = ".";
-}
-setInterval("swap()", 500);
-
 
 socket.on('connect', function () {
 	term = getInitialTerm();
@@ -45,7 +34,7 @@ socket.on('connect', function () {
 			newTweet(tweet);
 		}
 
-		if (!initiated) {
+		if (initiated) {
 			$("#loading_box").hide();
 		}
 	});
@@ -89,6 +78,8 @@ function newTweet(tweet) {
 	setTweet(whereToLoad, tweet);	
 	adjustId(whereToLoad);
 	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200);
+
+	initiated = !initiated;
 
 	displayed_tweets.push(tweet.id);
 	if (displayed_tweets.length > max_tweets)
