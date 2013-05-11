@@ -1,16 +1,8 @@
-/*
-@font-face {
-  font-family: "raleway";
-  src: url("../font/Raleway/raleway_thin.ttf")
-}
-*/
-
 body {
-	background:url(../img/bg.png) no-repeat;
-	background-position:left top;
+	background:url(../img/bg.jpg) no-repeat;
+	background-position:center top;
 	padding:0px;
 	margin:0px;
-/*	font-family: "raleway", "Lucida Sans Unicode","Lucida Grande","Trebuchet MS", Helvetica, Arial, sans-serif;*/
 	font-family: 'Raleway', sans-serif;
 }
 
@@ -94,8 +86,8 @@ h1 {
 
 .preferences {
 	position:absolute;
-	bottom: 1%;
-	right: 1%;
+	bottom: 10px;
+	right: 10px;
 }
 
 .preferences img {
