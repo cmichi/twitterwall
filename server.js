@@ -28,6 +28,8 @@ server.listen(process.env.PORT || 3000, function() {
 });
 
 var max_tweets = 6;
+var queue_size = 6;
+var minLastTime = 5000;
 
 /* hold all sockets within a streams array, according to their term, 
    for efficient handling.  */
@@ -46,6 +48,7 @@ var initial_tweets = {
 
 io.sockets.on('connection', function (socket) {
 	socket.on('start', function(term){
+		socket.tweetsSendInThisSlot = 0;
 		if (term == '' || term == undefined || term == null) 
 			term = "node.js";
 
@@ -66,7 +69,7 @@ io.sockets.on('connection', function (socket) {
 					    tweet.user.screen_name == undefined)
 						return;
 
-					console.log("@" + tweet.user.screen_name + ": " + tweet.text);
+					//console.log("@" + tweet.user.screen_name + ": " + tweet.text);
 					var next_tweet = {
 						id: tweet.id,
 						text: formatText(term, tweet.text),
@@ -82,11 +85,21 @@ io.sockets.on('connection', function (socket) {
 						return;
 					}
 					
-					console.log("pushing new tweet to " + streams[term].length + " clients for " + term);
 					for (var i in streams[term]) {
 						var s = streams[term][i];
 						if (s.disconnected === false) {
+							/* are we having way too many tweets streamed? 
+							this is the case for heavily trending topics.
+							it does not make sense to send them all to the 
+							client. some have to be ommitted. */
+							if (s.tweetsSendInThisSlot > max_tweets + queue_size) {
+								console.log("slot already exhausted. omitting tweets.");
+								continue;
+							}
+
+							console.log("pushing new tweet to " + streams[term].length + " clients for " + term);
 							s.emit('new_tweet', next_tweet);
+							s.tweetsSendInThisSlot++;
 							addToInitialTweets(term, next_tweet);
 						} else if (s.disconnected === true) {
 							console.log("one user disconnected from " + term);
@@ -98,6 +111,16 @@ io.sockets.on('connection', function (socket) {
 		}
 	});
 });
+
+
+var newSlot = function() {
+	for (var term in streams) {
+		for (var j in streams[term]) {
+			streams[term][j].tweetsSendInThisSlot = 0;
+		}
+	}
+}
+setInterval(newSlot, minLastTime);
 
 
 function addToInitialTweets(term, tweet) {
@@ -134,6 +157,7 @@ function getInitialTweets(term, socket) {
 			if (socket) {
 				addToInitialTweets(term, next_tweet);
 				socket.emit('new_tweet', next_tweet);
+				socket.tweetsSendInThisSlot++;
 			} 
 		}
 	});
@@ -144,6 +168,7 @@ function sendInitialTweets(term, socket) {
 	if (term in initial_tweets && initial_tweets[term].length > 0) {
 		for (var i in initial_tweets[term])
 			socket.emit('new_tweet', initial_tweets[term][i]);
+			socket.tweetsSendInThisSlot++;
 		
 	} else {
 		getInitialTweets(term, socket);
