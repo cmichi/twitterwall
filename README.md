@@ -35,6 +35,9 @@ The easy way:
 	exports.access_token_secret = 'secret';
 	^C
 	
+	# does your webserver support websockets? if not:
+	# $ export NO_WS_SUPPORT=1
+
 	$ node server.js
 
 Installing the development version:
@@ -52,6 +55,10 @@ Installing the development version:
 
 	# install the necessary dependencies from the package.json
 	$ npm install	
+
+	# does your webserver support websockets? if not:
+	# $ export NO_WS_SUPPORT=1
+
 	$ node server.js
 
 Then open [http://localhost:3000/](http://localhost:3000).

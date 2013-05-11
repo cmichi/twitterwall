@@ -151,7 +151,7 @@ function getInitialTweets(term, socket) {
 				break;
 
 			var tweet = tweets.results[i];
-			console.log(tweet)
+			//console.log(tweet)
 			var next_tweet = {
 				id: tweet.id,
 				text: formatText(term, tweet.text),

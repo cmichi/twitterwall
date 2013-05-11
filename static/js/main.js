@@ -30,7 +30,11 @@ socket.on('connect', function () {
 		if (displayed_tweets.length === max_tweets) {
 			pushQueue(tweet);
 		} else if (isTweetDisplayed(tweet) === false) {
-			newTweet(tweet);
+			/* even if: we want a little delay */
+			pushQueue(tweet);
+
+			/* no delay would be: */
+			//newTweet(tweet); 
 		}
 	});
 });
@@ -49,10 +53,7 @@ function adjustId(id) {
 var queue = [];
 var max_queue_size = 6;
 
-/* load the next tweet into the visible area.
-
-BUG: the problem here is, that new tweets get loaded __immediately__.
-So if you have many many tweets streaming in, this won't work out well. */
+/* load the next tweet into the visible area. */
 function newTweet(tweet) {	
 	//console.log(tweet);
 	var currTs = (new Date()).getTime();
