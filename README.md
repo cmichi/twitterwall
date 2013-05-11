@@ -25,6 +25,7 @@ Those can be obtained via [dev.twitter.com](http://dev.twitter.com) after
 The easy way:
 
 	$ npm install twitterwall
+	$ cd node_modules/twitterwall/
 
 	# create a file for twitter auth details
 	$ cat > config.js
