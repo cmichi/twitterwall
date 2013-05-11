@@ -5,10 +5,15 @@ This is a very basic twitterwall. I am now working on extending the project.
 
 # ToDo
 
- * enable different filtering options (locations, multiple keywords, multiple users)
+ * enable different filtering options (follow users, locations)
  * enable option to change display order (random, linear)
- * show images from tweets
+ * show images from tweets. Idea: do this by showing the tweet twice as long and alternating between text and image.
  * beware of streaming heavily trending topics, too much tweets are a problem for the app
+ * currently the project does not use socket.io rooms. this is due to some
+issues with handling the tracking of terms which have a huge amount of new tweets streaming in.
+In this case, we don't stream all of those new tweets to all clients, but
+instead limit the new tweets per client. For this case we have to keep
+track of how many tweets a client already has received.
 
 
 # Installation
