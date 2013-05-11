@@ -176,7 +176,7 @@ function setTweet(id, tweet) {
 function getInitialTerm() {
 	var params = parseUri(window.location.href).queryKey;
 	if ("term" in params && params.term != undefined)
-		return decodeURIComponent(params.term);
+		return decodeURIComponent(params.term).replace(/\+/g, " ");
 	else 
 		return standardTerm;
 }
