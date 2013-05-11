@@ -9,7 +9,7 @@ whereToLoadPriorities[parseInt(Math.random() * 6)] = 0; /* intial random positio
 
 /* let tweets stay for minimum x ms */
 var minLastTime = 5000;
-var checkTime = 1000;
+var checkTime = 2500;
 
 var term;
 var initiated = false;
@@ -21,11 +21,10 @@ var standardTerm = "node.js";
 socket.on('connect', function () {
 	term = getInitialTerm();
 	setTerm(term);
-	console.log("starting with " + term);
 	socket.emit('start', term);
-	
+
 	socket.on('new_tweet', function (tweet) {
-		console.log(tweet);
+		//console.log(tweet);
 
 		/* are there already enough tweets displayed? */
 		if (displayed_tweets.length === max_tweets) {
