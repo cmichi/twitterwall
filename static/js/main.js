@@ -58,7 +58,7 @@ var max_queue_size = 6;
 BUG: the problem here is, that new tweets get loaded __immediately__.
 So if you have many many tweets streaming in, this won't work out well. */
 function newTweet(tweet) {	
-	console.log(tweet);
+	//console.log(tweet);
 	var currTs = (new Date()).getTime();
 	
 	/* determine in which grid position to load the tweet */
@@ -98,12 +98,12 @@ function pushQueue(tweet) {
 
 	/* if queue full, simply omit tweet */
 	if (queue.length > max_queue_size) {
-		console.log("omitting tweet. queue full.");
+		//console.log("omitting tweet. queue full.");
 		return;
 	} else {
 		if (isTweetDisplayed(tweet)) return;
 
-		console.log("pushing tweet to queue (size: " + queue.length + ").");
+		//console.log("pushing tweet to queue (size: " + queue.length + ").");
 		queue.push(tweet);
 	}
 }
@@ -133,7 +133,7 @@ function workQueue() {
 			if (isTweetDisplayed(queue[0])) 
 				continue;
 
-			console.log("taking tweet from queue");
+			//console.log("taking tweet from queue");
 			newTweet(queue.splice(0,1)[0]);
 			return; /* only one each time, otherwise there is
 			too much movement in the wall  */

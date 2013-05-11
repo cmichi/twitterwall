@@ -17,6 +17,14 @@ app.use(express.bodyParser());
 
 var server = require('http').createServer(app);
 io = io.listen(server);
+/* using e.g. an older version of nginx without support for ws.
+use this env variable then! otherwise the user will face long loading
+times, until the browser gets that no ws are available. */
+if (process.env.NO_WS_SUPPORT == 1) {
+	console.log("no websocket support available  mode");
+	io.set("transports", ["xhr-polling"]);
+	io.set("polling duration", 10);
+}
 io.set("close timeout", 20);
 
 server.listen(process.env.PORT || 3000, function() {
