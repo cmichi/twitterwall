@@ -32,10 +32,6 @@ socket.on('connect', function () {
 		} else if (isTweetDisplayed(tweet) === false) {
 			newTweet(tweet);
 		}
-
-		if (initiated) {
-			$("#loading_box").hide();
-		}
 	});
 });
 	
@@ -78,13 +74,15 @@ function newTweet(tweet) {
 	adjustId(whereToLoad);
 	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200);
 
-	initiated = !initiated;
-
 	displayed_tweets.push(tweet.id);
 	if (displayed_tweets.length > max_tweets)
 		displayed_tweets.splice(0,1);
 	
 	whereToLoadPriorities[whereToLoad] = (new Date()).getTime();
+
+	initiated = !initiated;
+	if (initiated)
+		$("#loading_box").hide();
 }
 
 
