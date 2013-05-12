@@ -15,7 +15,7 @@ var term;
 var initiated = false;
 var displayed_tweets = [];
 var max_tweets = 6;
-var standardTerm = "node.js";
+var standardTerm = "#quote";
 
 
 socket.on('connect', function () {

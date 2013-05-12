@@ -54,7 +54,7 @@ io.sockets.on('connection', function (socket) {
 	socket.on('start', function(term){
 		socket.tweetsSendInThisSlot = 0;
 		if (term == '' || term == undefined || term == null) 
-			term = "node.js";
+			term = "#quote";
 
 		if (streams[term] != undefined && streams[term].length > 0) {
 			console.log("new client tuning in for " + term);
