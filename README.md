@@ -3,6 +3,8 @@
 This is a very basic twitterwall. The project takes use of the Twitter
 Streaming API to show new tweets in soft realtime.
 
+A public instance is available via [http://twitterwall.creal.de](http://twitterwall.creal.de).
+
 
 # ToDo
 
@@ -16,7 +18,7 @@ First you should get credentials for accessing the Twitter API.
 Those can be obtained via [dev.twitter.com](http://dev.twitter.com) after 
 [setting up a new app](https://dev.twitter.com/apps/new).
 
-The easy way:
+The npm (stable) way:
 
 	$ npm install twitterwall
 	$ cd node_modules/twitterwall/
