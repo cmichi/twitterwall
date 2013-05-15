@@ -159,8 +159,20 @@ function setTerm(new_term) {
 function setTweet(id, tweet) {
 	name = (tweet.name.length < 17) ? tweet.name : tweet.name.substr(0, 15) + "..";
 
+	var text = tweet.text;
+
+	/* if there is an uri in the text, complement it with a 'href' */
+	var regex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+	var uri = text.match(regex)
+
+	if (uri != 1) {
+		for (var i in uri)
+			text = text.replace(uri[i], 
+				"<a href='" + uri[i] + "'>" + uri[i] + "</a>");
+	}
+
 	var content = '<div class="text" id="tut">\
-		<div>' + tweet.text + '</div>\
+		<div>' + text + '</div>\
 	</div>\
 	\
 	<div class="info">\

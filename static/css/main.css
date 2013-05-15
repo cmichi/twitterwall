@@ -69,6 +69,12 @@ h1 {
 	text-align: justify;
 }
 
+.tweet .text a {
+	color:#fff;
+	font-weight:normal;
+	text-decoration:none;
+}
+
 .tweet .text strong {
 	color:#00aeff;
 	font-weight:normal;
