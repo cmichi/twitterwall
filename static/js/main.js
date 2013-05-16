@@ -167,9 +167,11 @@ function setTweet(id, tweet) {
 				"<a href='" + uri[i] + "'>" + uri[i] + "</a>");
 	}
 
-	/* todo: make hashtags clickable */
+	/* make hashtags clickable */
+	var regex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+	var uri = text.match(regex)
 
-	var content = '<div class="text" id="tweet' + id + '">\
+	var content = '<div class="text">\
 		<div>' + text + '</div>\
 	</div>\
 	\
