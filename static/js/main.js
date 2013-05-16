@@ -15,6 +15,8 @@ var term;
 var initiated = false;
 var displayed_tweets = [];
 var max_tweets = 6;
+var max_queue_size = 6;
+var queue = [];
 var standardTerm = "#quote";
 
 
@@ -32,9 +34,6 @@ socket.on('connect', function () {
 		} else if (isTweetDisplayed(tweet) === false) {
 			/* even if: we want a little delay */
 			pushQueue(tweet);
-
-			/* no delay would be: */
-			//newTweet(tweet); 
 		}
 	});
 });
@@ -49,9 +48,6 @@ function adjustId(id) {
 	$('#tweet' + id + ' .text').textfill({ maxFontPixels: 190, innerTag: 'div' });
 }
 
-
-var queue = [];
-var max_queue_size = 6;
 
 /* load the next tweet into the visible area. */
 function newTweet(tweet) {	
@@ -171,13 +167,16 @@ function setTweet(id, tweet) {
 				"<a href='" + uri[i] + "'>" + uri[i] + "</a>");
 	}
 
-	var content = '<div class="text" id="tut">\
+	/* todo: make hashtags clickable */
+
+	var content = '<div class="text" id="tweet' + id + '">\
 		<div>' + text + '</div>\
 	</div>\
 	\
 	<div class="info">\
 		<img class="author" src="' + tweet.pic + '" alt="" align="left" />\
-		<span class="name">@' + tweet.name + '</span>\
+		<span class="name"><a href="http://twitter.com/' +
+		tweet.name + '">@' + tweet.name + '</a></span>\
 	</div>';
 	
 	$('#tweet' + id).html(content);
