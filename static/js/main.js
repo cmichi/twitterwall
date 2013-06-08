@@ -68,10 +68,8 @@ function newTweet(tweet) {
 	$("#tweet" + whereToLoad).css('opacity', 0);
 	preload(tweet.pic);
 	setTweet(whereToLoad, tweet);	
-	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200, function() {
-		adjustId(whereToLoad);
-	});
-	//$("#tweet" + whereToLoad).css({display: "block"});
+	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200)
+	adjustId(whereToLoad);
 
 	displayed_tweets.push(tweet.id);
 	if (displayed_tweets.length > max_tweets)
@@ -204,7 +202,7 @@ function submit(frm) {
 
 $(window).resize(function() {
 	adjustAll();
-	//setTimeout("adjustAll()", 1000);
+	setTimeout("adjustAll()", 1000);
 });
 
 
