@@ -40,12 +40,12 @@ socket.on('connect', function () {
 	
 
 function adjustAll() {
-	$('.text').textfill({ maxFontPixels: 190, innerTag: 'div' });
+	$('.text').textfill({ maxFontPixels: 190, innerTag: 'div', explicitWidth: $('.text').width()+1 });
 }
 
 
 function adjustId(id) {
-	$('#tweet' + id + ' .text').textfill({ maxFontPixels: 190, innerTag: 'div' });
+	$('#tweet' + id + ' .text').textfill({ maxFontPixels: 190, innerTag: 'div', explicitWidth: $('.text').width()+1 });
 }
 
 
