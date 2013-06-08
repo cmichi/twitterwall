@@ -219,7 +219,12 @@ function formatText(term, text) {
 	text = text.replace(repl, "<strong>" + term + "</strong>");
 
 	text = text.replace(/"/g, "&quot;");
-	text = text.replace(/\n/g, "");
+	text = text.replace(/\n/g, " ");
+	text = text.replace(/\t/g, " ");
+	text = text.replace(/\s/g, " ");
+
+	/* possible optimization: when there is only one line without breaks 
+	and we can insert a space: do it. (eg. "foo#bar") */
 
 	return text.replace(/'/g, "&rsquo;");
 }
