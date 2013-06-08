@@ -16,7 +16,7 @@ app.use(express.static(__dirname + '/static'));
 app.use(express.bodyParser());
 
 var server = require('http').createServer(app);
-io = io.listen(server);
+io = io.listen(server, {log:false});
 /* using e.g. an older version of nginx without support for ws.
 use this env variable then! otherwise the user will face long loading
 times, until the browser gets that no ws are available. */

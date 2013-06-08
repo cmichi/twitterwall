@@ -68,8 +68,10 @@ function newTweet(tweet) {
 	$("#tweet" + whereToLoad).css('opacity', 0);
 	preload(tweet.pic);
 	setTweet(whereToLoad, tweet);	
-	adjustId(whereToLoad);
-	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200);
+	$("#tweet" + whereToLoad).animate({opacity: 1}, 1200, function() {
+		adjustId(whereToLoad);
+	});
+	//$("#tweet" + whereToLoad).css({display: "block"});
 
 	displayed_tweets.push(tweet.id);
 	if (displayed_tweets.length > max_tweets)
@@ -124,7 +126,7 @@ function workQueue() {
 	for (var a = 0; a < max_tweets; a++) {
 		var display_time = now - whereToLoadPriorities[a];
 		// console.log(display_time)
-		if (display_time >= minLastTime && queue.length > 0) {
+		if (whereToLoadPriorities[a] ===1 || (display_time >= minLastTime && queue.length > 0)) {
 			if (isTweetDisplayed(queue[0])) 
 				continue;
 
@@ -201,7 +203,8 @@ function submit(frm) {
 
 
 $(window).resize(function() {
-	setTimeout("adjustAll()", 1000);
+	adjustAll();
+	//setTimeout("adjustAll()", 1000);
 });
 
 
