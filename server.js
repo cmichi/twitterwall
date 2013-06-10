@@ -143,7 +143,11 @@ this is possible. */
 function getInitialTweets(term, socket) {
 	twitter.search(term, {}, function(err, tweets) {
 		var cmds = "";
-		//console.log(tweets);
+		if (!tweets) {
+			console.log("unable to fetch tweets! are you sure " +
+			"everything is set up correctly? check your connection " +
+			"and configuration.")
+		}
 		console.log(tweets.results.length + " initial tweets fetched");
 
 		for (var i = 0; i < max_tweets; i++) {

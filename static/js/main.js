@@ -5,7 +5,7 @@ else
 	var socket = io.connect('http://localhost');
 
 var whereToLoadPriorities = [1,1,1, 1,1,1];
-whereToLoadPriorities[parseInt(Math.random() * 6)] = 0; /* intial random position */
+whereToLoadPriorities[parseInt(Math.random() * 6)] = 0; /* randomize initial position */
 
 /* let tweets stay for minimum x ms */
 var minLastTime = 5000;
@@ -40,12 +40,20 @@ socket.on('connect', function () {
 	
 
 function adjustAll() {
-	$('.text').textfill({ maxFontPixels: 190, innerTag: 'div', explicitWidth: $('.text').width()+1 });
+	$('.text').textfill({ 
+		maxFontPixels: 190
+		, innerTag: 'div'
+		, explicitWidth: $('.text').width() + 1 
+	});
 }
 
 
 function adjustId(id) {
-	$('#tweet' + id + ' .text').textfill({ maxFontPixels: 190, innerTag: 'div', explicitWidth: $('.text').width()+1 });
+	$('#tweet' + id + ' .text').textfill({ 
+		maxFontPixels: 190
+		, innerTag: 'div'
+		, explicitWidth: $('.text').width() + 1 
+	});
 }
 
 
@@ -117,21 +125,22 @@ function isTweetDisplayed(tweet) {
 
 
 function workQueue() {
-	// console.log("checking queue...");
 	/* are there tweets which have already exhausted minLastTime? */
 	var now = (new Date()).getTime();
 
-	for (var a = 0; a < max_tweets; a++) {
+	for (var a = 0; a < queue.length; a++) {
 		var display_time = now - whereToLoadPriorities[a];
-		// console.log(display_time)
-		if (whereToLoadPriorities[a] ===1 || (display_time >= minLastTime && queue.length > 0)) {
-			if (isTweetDisplayed(queue[0])) 
+
+		if (whereToLoadPriorities[a] === 1 || (display_time >= minLastTime && queue.length > 0)) {
+			if (isTweetDisplayed(queue[a])) 
 				continue;
 
-			//console.log("taking tweet from queue");
+			/* take tweet from queue */
 			newTweet(queue.splice(0,1)[0]);
-			return; /* only one each time, otherwise there is
-			too much movement in the wall  */
+
+			/* take only one each time, otherwise there is too 
+			much movement in the wall  */
+			return; 
 		}
 	}
 	
