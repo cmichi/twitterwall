@@ -3,7 +3,8 @@ var io = require('socket.io');
 var http = require('http');
 
 var config = require('./config.js');
-var ntwitter = require('ntwitter');
+var ntwitter = require('./lib/ntwitter/');
+//var ntwitter = require('ntwitter');
 var twitter = new ntwitter({
 	consumer_key: config.consumer_key
 	, consumer_secret: config.consumer_secret
@@ -148,19 +149,22 @@ function getInitialTweets(term, socket) {
 			"everything is set up correctly? check your connection " +
 			"and configuration.")
 		}
-		console.log(tweets.results.length + " initial tweets fetched");
+		//console.log(tweets)
+		console.log(tweets.statuses.length + " initial tweets fetched");
 
 		for (var i = 0; i < max_tweets; i++) {
-			if (tweets.results[i] == undefined)
+			if (tweets.statuses[i] == undefined)
 				break;
 
-			var tweet = tweets.results[i];
+			var tweet = tweets.statuses[i];
+			//console.log(tweet.text)
 			//console.log(tweet)
+
 			var next_tweet = {
 				id: tweet.id,
 				text: formatText(term, tweet.text),
-				pic: tweet.profile_image_url,
-				name: tweet.from_user
+				pic: tweet.user.profile_image_url,
+				name: tweet.user.screen_name
 			};
 
 			if (socket) {
@@ -175,9 +179,11 @@ function getInitialTweets(term, socket) {
 
 function sendInitialTweets(term, socket) {
 	if (term in initial_tweets && initial_tweets[term].length > 0) {
-		for (var i in initial_tweets[term])
+		for (var i in initial_tweets[term]) {
 			socket.emit('new_tweet', initial_tweets[term][i]);
+			//console.log('initial tweet ' + initial_tweets[term][i]);
 			socket.tweetsSendInThisSlot++;
+		}
 		
 	} else {
 		getInitialTweets(term, socket);

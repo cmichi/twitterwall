@@ -162,6 +162,7 @@ function setTerm(new_term) {
 
 
 function setTweet(id, tweet) {
+	console.log(tweet);
 	name = (tweet.name.length < 17) ? tweet.name : tweet.name.substr(0, 15) + "..";
 
 	var text = tweet.text;
