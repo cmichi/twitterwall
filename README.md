@@ -20,29 +20,33 @@ Those can be obtained via [dev.twitter.com](http://dev.twitter.com) after
 
 The npm (stable) way:
 
-	$ npm install twitterwall
-	$ cd node_modules/twitterwall/
+	npm install twitterwall
+	cd node_modules/twitterwall/
 
 	# create a file for twitter auth details
-	$ cat > config.js
+	cat > config.js
 	exports.consumer_key = 'key';
 	exports.consumer_secret = 'secret';
 	exports.access_token_key = 'key';
 	exports.access_token_secret = 'secret';
 	^C
 	
-	# does your webserver support websockets? if not:
-	# $ export NO_WS_SUPPORT=1
+	cd lib/ntwitter/
+	npm install
+	cd ../../
 
-	$ node server.js
+	# does your webserver support websockets? if not:
+	# export NO_WS_SUPPORT=1
+
+	node server.js
 
 Installing the development version:
 
-	$ git clone https://github.com/cmichi/twitterwall.git
-	$ cd twitterwall/
+	git clone https://github.com/cmichi/twitterwall.git
+	cd twitterwall/
 
 	# create a file for twitter auth details
-	$ cat > config.js
+	cat > config.js
 	exports.consumer_key = 'key';
 	exports.consumer_secret = 'secret';
 	exports.access_token_key = 'key';
@@ -50,12 +54,16 @@ Installing the development version:
 	^C
 
 	# install the necessary dependencies from the package.json
-	$ npm install	
+	npm install	
+
+	cd lib/ntwitter/
+	npm install
+	cd ../../
 
 	# does your webserver support websockets? if not:
-	# $ export NO_WS_SUPPORT=1
+	# export NO_WS_SUPPORT=1
 
-	$ node server.js
+	node server.js
 
 Then open [http://localhost:3000/](http://localhost:3000).
 To stream a specific keyword use [http://localhost:3000/?term=keyword](http://localhost:3000/?term=keyword).
