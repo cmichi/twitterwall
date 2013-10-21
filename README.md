@@ -18,19 +18,13 @@ First you should get credentials for accessing the Twitter API.
 Those can be obtained via [dev.twitter.com](http://dev.twitter.com) after 
 [setting up a new app](https://dev.twitter.com/apps/new).
 
-The npm (stable) way:
-
-	npm install twitterwall
-	cd node_modules/twitterwall/
-
 Installing the development version:
 
 	git clone https://github.com/cmichi/twitterwall.git
 	cd twitterwall/
+	npm install
 
-Then continue with configuring/installing dependencies:
-
-	# create a file for twitter auth details
+	# create a file containing the twitter auth details
 	cat > config.js
 	exports.consumer_key = 'key';
 	exports.consumer_secret = 'secret';
