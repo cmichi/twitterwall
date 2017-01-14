@@ -5,6 +5,10 @@ Streaming API to show new tweets in soft realtime.
 
 A public instance is available via [http://twitterwall.creal.de](http://twitterwall.creal.de).
 
+## How it looks
+
+![Twitterwall](https://github.com/cmichi/twitterwall/raw/master/screenshot.jpg)
+
 
 # ToDo
 
